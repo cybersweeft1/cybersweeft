@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local Government ID - Cyber Sweeft</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://js.paystack.co/v2/inline.js"></script>
+<style>
+  :root {
+    --blue: #0a1f5c;
+    --blue-mid: #1a3a8f;
+    --blue-light: #2556cc;
+    --accent: #3b82f6;
+    --white: #ffffff;
+    --off-white: #f4f7ff;
+    --text-muted: #6b7db3;
+    --card-bg: #ffffff;
+    --shadow: 0 8px 40px rgba(10,31,92,0.12);
+    --success: #10b981;
+    --error: #ef4444;
+    --warning: #f59e0b;
+  }
+  [data-theme="dark"] {
+    --white: #0d1b3e;
+    --off-white: #0a1530;
+    --card-bg: #132050;
+    --text-muted: #8fa8d8;
+    --shadow: 0 8px 40px rgba(0,0,0,0.4);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--blue);
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh;
+  }
+  [data-theme="dark"] body { color: var(--white); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,31,92,0.97);
+    backdrop-filter: blur(12px);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+    box-shadow: 0 2px 20px rgba(10,31,92,0.3);
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--white);
+    letter-spacing: 1px;
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .theme-toggle {
+    background: rgba(255,255,255,0.1);
+    border: none; border-radius: 50%;
+    width: 38px; height: 38px;
+    color: white; cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .theme-toggle:hover { background: rgba(255,255,255,0.2); }
+
+  /* CONTAINER */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 100px 5% 60px;
+  }
+
+  /* HEADER */
+  .page-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .page-header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+  [data-theme="dark"] .page-header h1 { color: #93c5fd; }
+  .page-header p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* FORM CARD */
+  .form-card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(10,31,92,0.07);
+    position: relative;
+    overflow: hidden;
+  }
+  .form-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--blue-light), var(--accent));
+    border-radius: 24px 24px 0 0;
+  }
+
+  /* PRICE TAG */
+  .price-tag {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .price-tag .amount {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+  }
+  .price-tag .label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: 4px;
+  }
+
+  /* FORM STYLES */
+  .form-group {
+    margin-bottom: 24px;
+  }
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--blue);
+    margin-bottom: 8px;
+  }
+  [data-theme="dark"] .form-group label { color: #93c5fd; }
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid rgba(10,31,92,0.1);
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    background: var(--white);
+    color: var(--blue);
+    transition: border-color 0.2s;
+  }
+  [data-theme="dark"] .form-group input,
+  [data-theme="dark"] .form-group select {
+    background: #0d1b3e;
+    color: var(--white);
+    border-color: rgba(255,255,255,0.1);
+  }
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  /* BUTTONS */
+  .pay-btn, .download-btn, .redownload-btn {
+    width: 100%;
+    border: none;
+    border-radius: 14px;
+    padding: 18px 32px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Syne', sans-serif;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+    text-decoration: none;
+  }
+  .pay-btn {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
+    color: white;
+  }
+  .pay-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(10,31,92,0.3);
+  }
+  .pay-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  .download-btn {
+    background: var(--success);
+    color: white;
+  }
+  .download-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+  }
+  .redownload-btn {
+    background: rgba(10,31,92,0.1);
+    color: var(--blue);
+    font-size: 0.95rem;
+    margin-top: 12px;
+  }
+  [data-theme="dark"] .redownload-btn {
+    background: rgba(255,255,255,0.1);
+    color: var(--white);
+  }
+  .redownload-btn:hover {
+    background: rgba(10,31,92,0.2);
+  }
+
+  /* STATUS MESSAGES */
+  .status-message {
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: none;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+  }
+  .status-message.show { display: flex; }
+  .status-message.success {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+  .status-message.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+  }
+  .status-message.processing {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+  .status-message.warning {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+  }
+
+  /* LOADING SPINNER */
+  .spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+    display: none;
+  }
+  .spinner.show { display: block; }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* SCREENS */
+  .form-screen, .success-screen, .verify-screen {
+    display: none;
+  }
+  .form-screen.active, .success-screen.active, .verify-screen.active {
+    display: block;
+  }
+
+  /* SUCCESS SCREEN */
+  .success-screen {
+    text-align: center;
+    padding: 20px 10px;
+  }
+  .success-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 2.5rem;
+    color: white;
+    animation: scaleIn 0.5s ease;
+  }
+  @keyframes scaleIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .success-screen h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+  [data-theme="dark"] .success-screen h2 { color: #93c5fd; }
+  .success-screen p {
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+  .download-section {
+    background: rgba(10,31,92,0.05);
+    border-radius: 16px;
+    padding: 30px;
+    margin-top: 30px;
+    border: 2px dashed rgba(16, 185, 129, 0.3);
+  }
+  [data-theme="dark"] .download-section {
+    background: rgba(255,255,255,0.05);
+  }
+  .file-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  .file-info i {
+    color: var(--success);
+    font-size: 1.2rem;
+  }
+  .expiry-notice {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    color: var(--warning);
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  /* VERIFY SCREEN (for returning users) */
+  .verify-screen {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .verify-screen h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    color: var(--blue);
+    margin-bottom: 16px;
+  }
+  [data-theme="dark"] .verify-screen h2 { color: #93c5fd; }
+  .token-input-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .token-input {
+    flex: 1;
+    padding: 14px 16px;
+    border: 2px solid rgba(10,31,92,0.1);
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+  .verify-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .verify-btn:hover { opacity: 0.9; }
+  .divider {
+    margin: 30px 0;
+    text-align: center;
+    position: relative;
+  }
+  .divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(10,31,92,0.1);
+  }
+  .divider span {
+    background: var(--card-bg);
+    padding: 0 16px;
+    position: relative;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #060f2e;
+    padding: 30px 5%;
+    text-align: center;
+    color: rgba(255,255,255,0.6);
+    margin-top: 60px;
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: 8px;
+  }
+  .footer-logo span { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .container { padding: 90px 4% 40px; }
+    .form-card { padding: 28px 20px; }
+    .price-tag .amount { font-size: 2rem; }
+    .token-input-group { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">CYBER <span>SWEEFT</span></a>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"><i class="fas fa-moon"></i></button>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <h1>Local Government Identification</h1>
+    <p>Pay ₦2,500 and download your LG ID form instantly. Save your download token for future access!</p>
+  </div>
+
+  <div class="form-card">
+    <!-- Status Messages -->
+    <div id="statusMessage" class="status-message">
+      <i class="fas fa-info-circle"></i>
+      <span id="statusText"></span>
+    </div>
+
+    <!-- FORM SCREEN -->
+    <div id="formScreen" class="form-screen active">
+      <div class="price-tag">
+        <div class="amount">₦2,500</div>
+        <div class="label">One-time Payment • Instant Download • Lifetime Redownload Access</div>
+      </div>
+
+      <form id="lgForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name *</label>
+            <input type="text" id="firstName" name="firstName" required placeholder="Enter first name">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name *</label>
+            <input type="text" id="lastName" name="lastName" required placeholder="Enter last name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" required placeholder="your@email.com">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" required placeholder="08012345678">
+        </div>
+
+        <div class="form-group">
+          <label for="lga">Local Government Area *</label>
+          <select id="lga" name="lga" required>
+            <option value="">Select your LGA</option>
+            <option value="agege">Agege</option>
+            <option value="ajeromi-ifelodun">Ajeromi-Ifelodun</option>
+            <option value="alimosho">Alimosho</option>
+            <option value="amuwo-odofin">Amuwo-Odofin</option>
+            <option value="apapa">Apapa</option>
+            <option value="badagry">Badagry</option>
+            <option value="epe">Epe</option>
+            <option value="eti-osa">Eti-Osa</option>
+            <option value="ibeju-lekki">Ibeju-Lekki</option>
+            <option value="ifako-ijaiye">Ifako-Ijaiye</option>
+            <option value="ikeja">Ikeja</option>
+            <option value="ikorodu">Ikorodu</option>
+            <option value="kosofe">Kosofe</option>
+            <option value="lagos-island">Lagos Island</option>
+            <option value="lagos-mainland">Lagos Mainland</option>
+            <option value="mushin">Mushin</option>
+            <option value="ojo">Ojo</option>
+            <option value="oshodi-isolo">Oshodi-Isolo</option>
+            <option value="shomolu">Shomolu</option>
+            <option value="surulere">Surulere</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Residential Address *</label>
+          <input type="text" id="address" name="address" required placeholder="Enter your full address">
+        </div>
+
+        <button type="submit" class="pay-btn" id="payBtn">
+          <span class="spinner" id="spinner"></span>
+          <span id="btnText">Pay ₦2,500 & Download Instantly</span>
+          <i class="fas fa-lock" id="lockIcon"></i>
+        </button>
+      </form>
+
+      <div class="divider"><span>OR</span></div>
+
+      <div style="text-align: center;">
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">
+          Already paid? Enter your download token:
+        </p>
+        <div class="token-input-group">
+          <input type="text" id="existingToken" class="token-input" placeholder="XXXX-XXXX-XXXX" maxlength="14">
+          <button class="verify-btn" onclick="verifyExistingToken()">
+            <i class="fas fa-search"></i> Verify
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUCCESS/DOWNLOAD SCREEN -->
+    <div id="successScreen" class="success-screen">
+      <div class="success-icon">
+        <i class="fas fa-check"></i>
+      </div>
+      <h2>Payment Successful!</h2>
+      <p>Your Local Government ID form is ready for download.</p>
+      
+      <div class="download-section">
+        <div class="file-info">
+          <i class="fas fa-file-pdf"></i>
+          <span id="fileName">LG_ID_Form.pdf</span>
+          <span style="color: var(--text-muted);">•</span>
+          <span id="fileSize">~150 KB</span>
+        </div>
+        
+        <button class="download-btn" onclick="downloadFile()">
+          <i class="fas fa-download"></i> Download Now
+        </button>
+        
+        <button class="redownload-btn" onclick="showRedownloadInfo()">
+          <i class="fas fa-redo"></i> Lost your file? Redownload anytime
+        </button>
+        
+        <div class="expiry-notice">
+          <i class="fas fa-infinity"></i>
+          <span>Your download token never expires. Save it: <strong id="displayToken" style="font-family: monospace; letter-spacing: 1px;"></strong></span>
+        </div>
+      </div>
+
+      <div style="margin-top: 30px;">
+        <a href="index.html" style="color: var(--accent); text-decoration: none; font-weight: 500;">
+          <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+      </div>
+    </div>
+
+    <!-- REDOWNLOAD INFO SCREEN -->
+    <div id="redownloadScreen" style="display: none; text-align: center; padding: 20px;">
+      <div style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;">
+        <i class="fas fa-key"></i>
+      </div>
+      <h3 style="font-family: 'Syne', sans-serif; margin-bottom: 16px;">Your Download Token</h3>
+      <p style="color: var(--text-muted); margin-bottom: 24px; line-height: 1.6;">
+        Save this token! You can use it anytime to redownload your file without paying again.
+      </p>
+      
+      <div style="background: rgba(10,31,92,0.05); padding: 20px; border-radius: 12px; margin-bottom: 24px; border: 2px solid var(--accent);">
+        <code id="redownloadToken" style="font-size: 1.3rem; font-weight: 700; color: var(--blue); letter-spacing: 2px;"></code>
+      </div>
+      
+      <button class="download-btn" onclick="copyToken()">
+        <i class="fas fa-copy"></i> Copy Token
+      </button>
+      
+      <div style="margin-top: 20px;">
+        <button onclick="backToSuccess()" style="background: none; border: none; color: var(--text-muted); cursor: pointer; text-decoration: underline;">
+          Back to Download
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">CYBER <span>SWEEFT</span> SERVICES</div>
+  <p style="font-size:0.8rem;">"Distance Is Not A Barrier"</p>
+  <div style="margin-top: 16px; font-size: 0.75rem; opacity: 0.7;">
+    Secured by Paystack <i class="fas fa-shield-alt" style="margin-left: 5px;"></i>
+  </div>
+</footer>
+
+<script>
+// ==========================================
+// CONFIGURATION - UPDATE THESE
+// ==========================================
+const CONFIG = {
+  // Your Paystack Public Key
+  PAYSTACK_PUBLIC_KEY: 'pk_live_your_actual_public_key_here',
+  
+  // GitHub repository details
+  GITHUB_REPO: 'yourusername/cyber-sweeft-services', // e.g., "johndoe/cyber-sweeft"
+  GITHUB_BRANCH: 'main', // or 'master'
+  
+  // File mapping: LGA value -> filename in your repo
+  FILES: {
+    'agege': 'Agege_LG_ID_Form.pdf',
+    'ajeromi-ifelodun': 'Ajeromi_Ifelodun_LG_ID_Form.pdf',
+    'alimosho': 'Alimosho_LG_ID_Form.pdf',
+    'amuwo-odofin': 'Amuwo_Odofin_LG_ID_Form.pdf',
+    'apapa': 'Apapa_LG_ID_Form.pdf',
+    'badagry': 'Badagry_LG_ID_Form.pdf',
+    'epe': 'Epe_LG_ID_Form.pdf',
+    'eti-osa': 'Eti_Osa_LG_ID_Form.pdf',
+    'ibeju-lekki': 'Ibeju_Lekki_LG_ID_Form.pdf',
+    'ifako-ijaiye': 'Ifako_Ijaiye_LG_ID_Form.pdf',
+    'ikeja': 'Ikeja_LG_ID_Form.pdf',
+    'ikorodu': 'Ikorodu_LG_ID_Form.pdf',
+    'kosofe': 'Kosofe_LG_ID_Form.pdf',
+    'lagos-island': 'Lagos_Island_LG_ID_Form.pdf',
+    'lagos-mainland': 'Lagos_Mainland_LG_ID_Form.pdf',
+    'mushin': 'Mushin_LG_ID_Form.pdf',
+    'ojo': 'Ojo_LG_ID_Form.pdf',
+    'oshodi-isolo': 'Oshodi_Isolo_LG_ID_Form.pdf',
+    'shomolu': 'Shomolu_LG_ID_Form.pdf',
+    'surulere': 'Surulere_LG_ID_Form.pdf'
+  },
+  
+  // Price in kobo (₦2,500 = 250000 kobo)
+  PRICE_KOBO: 250000,
+  
+  // Storage key for localStorage
+  STORAGE_KEY: 'cyber_sweeft_lg_downloads'
+};
+
+// ==========================================
+// THEME TOGGLE
+// ==========================================
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    btn.innerHTML = '<i class="fas fa-moon"></i>';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.innerHTML = '<i class="fas fa-sun"></i>';
+  }
+}
+
+// ==========================================
+// UTILITY FUNCTIONS
+// ==========================================
+function showStatus(message, type) {
+  const statusDiv = document.getElementById('statusMessage');
+  const statusText = document.getElementById('statusText');
+  statusText.textContent = message;
+  statusDiv.className = `status-message show ${type}`;
+  setTimeout(() => hideStatus(), 5000);
+}
+
+function hideStatus() {
+  document.getElementById('statusMessage').classList.remove('show');
+}
+
+function setLoading(isLoading) {
+  const btn = document.getElementById('payBtn');
+  const spinner = document.getElementById('spinner');
+  const btnText = document.getElementById('btnText');
+  const lockIcon = document.getElementById('lockIcon');
+  
+  btn.disabled = isLoading;
+  if (isLoading) {
+    spinner.classList.add('show');
+    btnText.textContent = 'Processing...';
+    lockIcon.style.display = 'none';
+  } else {
+    spinner.classList.remove('show');
+    btnText.textContent = 'Pay ₦2,500 & Download Instantly';
+    lockIcon.style.display = 'inline-block';
+  }
+}
+
+function generateToken() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // Removed confusing chars (I, O, 0, 1)
+  let token = '';
+  for (let i = 0; i < 12; i++) {
+    token += chars.charAt(Math.floor(Math.random() * chars.length));
+    if (i === 3 || i === 7) token += '-';
+  }
+  return token;
+}
+
+function formatToken(token) {
+  return token.replace(/(.{4})/g, '$1-').replace(/-$/, '');
+}
+
+// ==========================================
+// STORAGE MANAGEMENT
+// ==========================================
+function saveDownloadRecord(record) {
+  let records = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEY) || '[]');
+  records.push(record);
+  localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(records));
+}
+
+function getDownloadRecord(token) {
+  const records = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEY) || '[]');
+  return records.find(r => r.token === token);
+}
+
+function updateDownloadCount(token) {
+  let records = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEY) || '[]');
+  const record = records.find(r => r.token === token);
+  if (record) {
+    record.downloadCount = (record.downloadCount || 0) + 1;
+    record.lastDownload = new Date().toISOString();
+    localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(records));
+  }
+}
+
+// ==========================================
+// GITHUB DOWNLOAD URL BUILDER
+// ==========================================
+function getGitHubRawUrl(filename) {
+  return `https://raw.githubusercontent.com/${CONFIG.GITHUB_REPO}/${CONFIG.GITHUB_BRANCH}/local-gov-forms/${filename}`;
+}
+
+// ==========================================
+// FORM SUBMISSION & PAYMENT
+// ==========================================
+document.getElementById('lgForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  hideStatus();
+  
+  // Collect form data
+  const formData = {
+    firstName: document.getElementById('firstName').value.trim(),
+    lastName: document.getElementById('lastName').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    lga: document.getElementById('lga').value,
+    address: document.getElementById('address').value.trim()
+  };
+  
+  // Validation
+  if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone || !formData.lga || !formData.address) {
+    showStatus('Please fill in all required fields.', 'error');
+    return;
+  }
+  
+  if (!formData.email.includes('@') || !formData.email.includes('.')) {
+    showStatus('Please enter a valid email address.', 'error');
+    return;
+  }
+  
+  // Check if file exists for selected LGA
+  if (!CONFIG.FILES[formData.lga]) {
+    showStatus('Selected LGA form is not available yet. Please contact support.', 'error');
+    return;
+  }
+  
+  setLoading(true);
+  
+  // Generate unique reference and token
+  const reference = 'LGA_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9).toUpperCase();
+  const downloadToken = generateToken();
+  
+  // Store pending transaction
+  const pendingTx = {
+    reference,
+    token: downloadToken,
+    formData,
+    fileName: CONFIG.FILES[formData.lga],
+    status: 'pending'
+  };
+  sessionStorage.setItem('pending_transaction', JSON.stringify(pendingTx));
+  
+  // Initialize Paystack
+  const handler = PaystackPop.setup({
+    key: CONFIG.PAYSTACK_PUBLIC_KEY,
+    email: formData.email,
+    amount: CONFIG.PRICE_KOBO,
+    currency: 'NGN',
+    ref: reference,
+    metadata: {
+      custom_fields: [
+        { display_name: "First Name", variable_name: "first_name", value: formData.firstName },
+        { display_name: "Last Name", variable_name: "last_name", value: formData.lastName },
+        { display_name: "LGA", variable_name: "lga", value: formData.lga },
+        { display_name: "Download Token", variable_name: "token", value: downloadToken }
+      ],
+      token: downloadToken,
+      lga: formData.lga
+    },
+    callback: function(response) {
+      // Payment completed - verify and process
+      handlePaymentSuccess(response.reference, downloadToken, formData);
+    },
+    onClose: function() {
+      setLoading(false);
+      showStatus('Payment cancelled. You can retry when ready.', 'warning');
+    }
+  });
+  
+  handler.openIframe();
+});
+
+// ==========================================
+// PAYMENT SUCCESS HANDLER
+// ==========================================
+async function handlePaymentSuccess(reference, token, formData) {
+  showStatus('Verifying payment...', 'processing');
+  
+  // In production, verify with your backend here
+  // For now, we trust the callback and proceed
+  
+  // Create download record
+  const record = {
+    token: token,
+    reference: reference,
+    email: formData.email,
+    lga: formData.lga,
+    fileName: CONFIG.FILES[formData.lga],
+    downloadUrl: getGitHubRawUrl(CONFIG.FILES[formData.lga]),
+    purchaseDate: new Date().toISOString(),
+    downloadCount: 0,
+    paymentVerified: true
+  };
+  
+  // Save to localStorage
+  saveDownloadRecord(record);
+  
+  // Clear pending transaction
+  sessionStorage.removeItem('pending_transaction');
+  
+  // Show success screen
+  showSuccessScreen(record);
+  
+  // Auto-trigger download after 2 seconds
+  setTimeout(() => {
+    triggerDownload(record.downloadUrl, record.fileName);
+    updateDownloadCount(token);
+  }, 2000);
+}
+
+// ==========================================
+// SUCCESS SCREEN MANAGEMENT
+// ==========================================
+function showSuccessScreen(record) {
+  document.getElementById('formScreen').classList.remove('active');
+  document.getElementById('successScreen').classList.add('active');
+  
+  // Update file info
+  document.getElementById('fileName').textContent = record.fileName;
+  document.getElementById('displayToken').textContent = formatToken(record.token);
+  
+  // Store current record for redownload
+  window.currentRecord = record;
+}
+
+// ==========================================
+// DOWNLOAD FUNCTIONS
+// ==========================================
+function downloadFile() {
+  if (!window.currentRecord) {
+    showStatus('Error: No file available for download.', 'error');
+    return;
+  }
+  
+  const record = window.currentRecord;
+  triggerDownload(record.downloadUrl, record.fileName);
+  updateDownloadCount(record.token);
+  
+  showStatus('Download started!', 'success');
+}
+
+function triggerDownload(url, filename) {
+  // Create temporary anchor element
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename; // Suggests filename for download
+  link.target = '_blank'; // Fallback for browsers that don't support download attribute
+  
+  // For GitHub raw URLs, force download using fetch + blob
+  fetch(url)
+    .then(response => {
+      if (!response.ok) throw new Error('File not found');
+      return response.blob();
+    })
+    .then(blob => {
+      const blobUrl = window.URL.createObjectURL(blob);
+      link.href = blobUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(blobUrl);
+    })
+    .catch(error => {
+      console.error('Download error:', error);
+      // Fallback: open in new tab
+      window.open(url, '_blank');
+      showStatus('File opened in new tab. Please save manually.', 'warning');
+    });
+}
+
+// ==========================================
+// REDOWNLOAD FEATURES
+// ==========================================
+function showRedownloadInfo() {
+  document.getElementById('successScreen').classList.remove('active');
+  document.getElementById('redownloadScreen').style.display = 'block';
+  document.getElementById('redownloadToken').textContent = formatToken(window.currentRecord.token);
+}
+
+function backToSuccess() {
+  document.getElementById('redownloadScreen').style.display = 'none';
+  document.getElementById('successScreen').classList.add('active');
+}
+
+function copyToken() {
+  const token = window.currentRecord.token;
+  navigator.clipboard.writeText(formatToken(token)).then(() => {
+    showStatus('Token copied to clipboard!', 'success');
+  }).catch(() => {
+    // Fallback
+    const textArea = document.createElement('textarea');
+    textArea.value = formatToken(token);
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    showStatus('Token copied to clipboard!', 'success');
+  });
+}
+
+// ==========================================
+// VERIFY EXISTING TOKEN (for returning users)
+// ==========================================
+function verifyExistingToken() {
+  const input = document.getElementById('existingToken').value.trim().replace(/-/g, '');
+  
+  if (input.length !== 12) {
+    showStatus('Please enter a valid 12-character token.', 'error');
+    return;
+  }
+  
+  const record = getDownloadRecord(input);
+  
+  if (!record) {
+    showStatus('Token not found. Please check and try again, or make a new purchase.', 'error');
+    return;
+  }
+  
+  if (!record.paymentVerified) {
+    showStatus('Payment not verified for this token. Please contact support.', 'error');
+    return;
+  }
+  
+  // Valid token - show download screen
+  window.currentRecord = record;
+  showSuccessScreen(record);
+  showStatus('Welcome back! Your download is ready.', 'success');
+}
+
+// ==========================================
+// CHECK FOR RETURNING USERS (URL params)
+// ==========================================
+window.addEventListener('load', function() {
+  // Check if user is returning with token in URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get('token');
+  
+  if (token) {
+    document.getElementById('existingToken').value = token;
+    verifyExistingToken();
+  }
+  
+  // Check for pending transaction (page refresh during payment)
+  const pending = sessionStorage.getItem('pending_transaction');
+  if (pending) {
+    const tx = JSON.parse(pending);
+    // If we have a pending transaction, we could verify it here
+    // For now, just clear it
+    sessionStorage.removeItem('pending_transaction');
+  }
+});
+</script>
+</body>
+</html>
