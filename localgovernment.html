@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Local Government ID - Cyber Sweeft</title>
+<title>Local Government ID Forms - Cyber Sweeft</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://js.paystack.co/v2/inline.js"></script>
@@ -19,193 +19,111 @@
 
 <div class="container">
   <div class="page-header">
-    <h1>Local Government Identification</h1>
-    <p>Pay ₦2,500 and download your LG ID form instantly. Save your download token for lifetime access!</p>
+    <h1>Local Government ID Forms</h1>
+    <p>Official LG identification forms for all Lagos Local Government Areas. <strong>₦3,000 each.</strong> Instant download after payment.</p>
   </div>
 
-  <div class="form-card">
-    <!-- Status Messages -->
-    <div id="statusMessage" class="status-message">
-      <i class="fas fa-info-circle"></i>
-      <span id="statusText"></span>
+  <!-- Price Banner -->
+  <div class="price-banner">
+    <div class="price-highlight">
+      <span class="price-amount">₦3,000</span>
+      <span class="price-label">per form</span>
     </div>
+    <p class="price-note"><i class="fas fa-bolt"></i> Instant Download • Device-Locked Purchase</p>
+  </div>
 
-    <!-- FORM SCREEN -->
-    <div id="formScreen" class="form-screen active">
-      <div class="price-tag">
-        <div class="amount">₦2,500</div>
-        <div class="label">One-time Payment • Instant Download • Lifetime Redownloads</div>
-      </div>
-
-      <form id="lgForm">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="firstName">First Name *</label>
-            <input type="text" id="firstName" required placeholder="Enter first name">
-          </div>
-          <div class="form-group">
-            <label for="lastName">Last Name *</label>
-            <input type="text" id="lastName" required placeholder="Enter last name">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email Address *</label>
-          <input type="email" id="email" required placeholder="your@email.com">
-        </div>
-
-        <div class="form-group">
-          <label for="phone">Phone Number *</label>
-          <input type="tel" id="phone" required placeholder="08012345678">
-        </div>
-
-        <div class="form-group">
-          <label for="lga">Local Government Area *</label>
-          <select id="lga" required>
-            <option value="">Select your LGA</option>
-            <option value="agege">Agege</option>
-            <option value="ajeromi-ifelodun">Ajeromi-Ifelodun</option>
-            <option value="alimosho">Alimosho</option>
-            <option value="amuwo-odofin">Amuwo-Odofin</option>
-            <option value="apapa">Apapa</option>
-            <option value="badagry">Badagry</option>
-            <option value="epe">Epe</option>
-            <option value="eti-osa">Eti-Osa</option>
-            <option value="ibeju-lekki">Ibeju-Lekki</option>
-            <option value="ifako-ijaiye">Ifako-Ijaiye</option>
-            <option value="ikeja">Ikeja</option>
-            <option value="ikorodu">Ikorodu</option>
-            <option value="kosofe">Kosofe</option>
-            <option value="lagos-island">Lagos Island</option>
-            <option value="lagos-mainland">Lagos Mainland</option>
-            <option value="mushin">Mushin</option>
-            <option value="ojo">Ojo</option>
-            <option value="oshodi-isolo">Oshodi-Isolo</option>
-            <option value="shomolu">Shomolu</option>
-            <option value="surulere">Surulere</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="address">Residential Address *</label>
-          <input type="text" id="address" required placeholder="Enter your full address">
-        </div>
-
-        <button type="submit" class="pay-btn" id="payBtn">
-          <span class="spinner" id="spinner"></span>
-          <span id="btnText">Pay ₦2,500 & Download Instantly</span>
-          <i class="fas fa-lock" id="lockIcon"></i>
-        </button>
-      </form>
-
-      <div class="divider"><span>OR</span></div>
-
-      <div class="token-recovery">
-        <p>Already paid? Enter your download token:</p>
-        <div class="token-input-group">
-          <input type="text" id="existingToken" class="token-input" placeholder="XXXX-XXXX-XXXX" maxlength="14">
-          <button class="verify-btn" onclick="verifyExistingToken()">
-            <i class="fas fa-search"></i> Verify
-          </button>
-        </div>
-      </div>
+  <!-- Search -->
+  <div class="search-section">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Search by LGA name...">
     </div>
+  </div>
 
-    <!-- SUCCESS/DOWNLOAD SCREEN -->
-    <div id="successScreen" class="success-screen">
+  <!-- Forms Grid -->
+  <div class="forms-grid" id="formsGrid">
+    <div class="loading">Loading forms...</div>
+  </div>
+
+  <!-- Download Success Screen -->
+  <div class="download-screen" id="downloadScreen">
+    <div class="download-card">
       <div class="success-icon">
-        <i class="fas fa-check"></i>
+        <i class="fas fa-check-circle"></i>
       </div>
       <h2>Payment Successful!</h2>
-      <p>Your Local Government ID form is ready for download.</p>
+      <p class="download-form-name" id="downloadFormName"></p>
       
-      <div class="download-section">
-        <div class="file-info">
-          <i class="fas fa-file-pdf"></i>
-          <span id="fileName">LG_ID_Form.pdf</span>
-          <span class="separator">•</span>
-          <span id="fileSize">~150 KB</span>
-        </div>
-        
-        <button class="download-btn" onclick="downloadFile()">
-          <i class="fas fa-download"></i> Download Now
-        </button>
-        
-        <button class="redownload-btn" onclick="showRedownloadInfo()">
-          <i class="fas fa-redo"></i> Lost your file? Redownload anytime
-        </button>
-        
-        <div class="expiry-notice">
-          <i class="fas fa-infinity"></i>
-          <span>Save this token for future access: <strong id="displayToken"></strong></span>
+      <div class="warning-box critical">
+        <i class="fas fa-exclamation-triangle"></i>
+        <div>
+          <strong>Important:</strong> Your download has started automatically. 
+          <strong>If you leave this page, you will need to pay ₦3,000 again to access this file.</strong> 
+          Purchases are locked to this device only. Clearing browser data will remove access.
         </div>
       </div>
 
-      <div class="back-link">
-        <a href="index.html">
-          <i class="fas fa-arrow-left"></i> Back to Home
-        </a>
+      <div class="download-actions">
+        <button class="retry-btn" onclick="retryDownload()">
+          <i class="fas fa-redo"></i> Download Again
+        </button>
+        <button class="store-btn" onclick="returnToStore()">
+          <i class="fas fa-store"></i> Browse More Forms
+        </button>
       </div>
-    </div>
 
-    <!-- REDOWNLOAD INFO SCREEN -->
-    <div id="redownloadScreen" class="redownload-screen">
-      <div class="token-icon">
-        <i class="fas fa-key"></i>
-      </div>
-      <h3>Your Download Token</h3>
-      <p>Save this token! You can use it anytime to redownload your file without paying again.</p>
-      
-      <div class="token-box">
-        <code id="redownloadToken"></code>
-      </div>
-      
-      <button class="download-btn" onclick="copyToken()">
-        <i class="fas fa-copy"></i> Copy Token
-      </button>
-      
-      <button class="back-btn" onclick="backToSuccess()">
-        Back to Download
-      </button>
+      <p class="transaction-ref">
+        Reference: <span id="transactionRef"></span>
+      </p>
     </div>
-
   </div>
 </div>
+
+<!-- Purchase Modal -->
+<div class="modal" id="purchaseModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    
+    <div class="modal-price-tag">
+      <span class="big-price">₦3,000</span>
+      <span class="per-form">per form</span>
+    </div>
+    
+    <h3>Complete Purchase</h3>
+    <p class="modal-form-name" id="modalFormName"></p>
+    
+    <div class="form-group">
+      <label>Email Address (for receipt)</label>
+      <input type="email" id="buyerEmail" placeholder="your@email.com" required>
+    </div>
+    
+    <div class="modal-error" id="modalError"></div>
+    
+    <button class="confirm-btn" id="confirmBuyBtn" onclick="confirmPurchase()">
+      <i class="fas fa-lock"></i> Pay ₦3,000 & Download Now
+    </button>
+    
+    <p class="modal-warning">
+      <i class="fas fa-info-circle"></i> 
+      Download starts immediately after payment. Save your file - you won't be charged again on this device.
+    </p>
+  </div>
+</div>
+
+<!-- Notification -->
+<div class="notification" id="notification"></div>
 
 <footer>
   <div class="footer-logo">CYBER <span>SWEEFT</span> SERVICES</div>
   <p class="tagline">"Distance Is Not A Barrier"</p>
   <div class="security-badge">
-    Secured by Paystack <i class="fas fa-shield-alt"></i>
+    <i class="fas fa-lock"></i> ₦3,000 per form • Secured by Paystack
   </div>
 </footer>
 
-<!-- Config injection (optional - server can populate this) -->
 <script id="app-config" type="application/json">
 {
-  "PAYSTACK_PUBLIC_KEY": "pk_live_your_actual_public_key_here",
-  "FILES": {
-    "agege": "Agege_LG_ID_Form.pdf",
-    "ajeromi-ifelodun": "Ajeromi_Ifelodun_LG_ID_Form.pdf",
-    "alimosho": "Alimosho_LG_ID_Form.pdf",
-    "amuwo-odofin": "Amuwo_Odofin_LG_ID_Form.pdf",
-    "apapa": "Apapa_LG_ID_Form.pdf",
-    "badagry": "Badagry_LG_ID_Form.pdf",
-    "epe": "Epe_LG_ID_Form.pdf",
-    "eti-osa": "Eti_Osa_LG_ID_Form.pdf",
-    "ibeju-lekki": "Ibeju_Lekki_LG_ID_Form.pdf",
-    "ifako-ijaiye": "Ifako_Ijaiye_LG_ID_Form.pdf",
-    "ikeja": "Ikeja_LG_ID_Form.pdf",
-    "ikorodu": "Ikorodu_LG_ID_Form.pdf",
-    "kosofe": "Kosofe_LG_ID_Form.pdf",
-    "lagos-island": "Lagos_Island_LG_ID_Form.pdf",
-    "lagos-mainland": "Lagos_Mainland_LG_ID_Form.pdf",
-    "mushin": "Mushin_LG_ID_Form.pdf",
-    "ojo": "Ojo_LG_ID_Form.pdf",
-    "oshodi-isolo": "Oshodi_Isolo_LG_ID_Form.pdf",
-    "shomolu": "Shomolu_LG_ID_Form.pdf",
-    "surulere": "Surulere_LG_ID_Form.pdf"
-  }
+  "PAYSTACK_PUBLIC_KEY": "pk_live_your_actual_public_key_here"
 }
 </script>
 
