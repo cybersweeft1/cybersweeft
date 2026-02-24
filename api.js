@@ -1,32 +1,21 @@
 /**
  * api.js - SERVER-SIDE ONLY
- * Store in secure backend (Node.js/Express, Vercel Functions, etc.)
+ * Store in secure backend (Node.js/Express, serverless functions, etc.)
  * NEVER expose to frontend
  */
 
 const CONFIG = {
+  // Paystack credentials - KEEP SECRET
   PAYSTACK_SECRET_KEY: process.env.PAYSTACK_SECRET_KEY || 'sk_live_your_secret_key_here',
   PAYSTACK_PUBLIC_KEY: process.env.PAYSTACK_PUBLIC_KEY || 'pk_live_your_public_key_here',
   
+  // GitHub repo (raw content access)
   GITHUB_REPO: 'cybersweeft1/cybersweeft',
   GITHUB_BRANCH: 'main',
   PROJECTS_FOLDER: 'projects',
   
-  PRICE_KOBO: 250000, // ₦2,500
-  
-  // Categories based on filename prefixes
-  CATEGORIES: {
-    'CS': 'Computer Science',
-    'ENG': 'Engineering',
-    'BUS': 'Business Admin',
-    'MED': 'Medical/Health',
-    'LAW': 'Law',
-    'EDU': 'Education',
-    'SCI': 'Science',
-    'ART': 'Arts/Humanities',
-    'AGR': 'Agriculture',
-    'MAS': 'Mass Communication'
-  }
+  // Fixed price for all projects (₦2,500 in kobo)
+  PRICE_KOBO: 250000
 };
 
 const PAYSTACK_API = 'https://api.paystack.co';
@@ -34,7 +23,7 @@ const PAYSTACK_API = 'https://api.paystack.co';
 /**
  * Initialize Paystack transaction
  */
-async function initializeTransaction(email, metadata = {}) {
+async function initializeTransaction(paymentData) {
   try {
     const response = await fetch(`${PAYSTACK_API}/transaction/initialize`, {
       method: 'POST',
@@ -43,11 +32,11 @@ async function initializeTransaction(email, metadata = {}) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: email,
+        email: paymentData.email,
         amount: CONFIG.PRICE_KOBO,
         currency: 'NGN',
-        metadata: metadata,
-        channels: ['card', 'bank', 'ussd', 'qr', 'mobile_money', 'bank_transfer']
+        reference: paymentData.reference,
+        metadata: paymentData.metadata
       })
     });
 
@@ -59,21 +48,20 @@ async function initializeTransaction(email, metadata = {}) {
         authorization_url: data.data.authorization_url,
         reference: data.data.reference
       };
-    } else {
-      throw new Error(data.message);
     }
+    throw new Error(data.message || 'Transaction failed');
   } catch (error) {
-    console.error('Paystack Error:', error);
     return { success: false, error: error.message };
   }
 }
 
 /**
- * Verify transaction
+ * Verify Paystack transaction
  */
 async function verifyTransaction(reference) {
   try {
     const response = await fetch(`${PAYSTACK_API}/transaction/verify/${reference}`, {
+      method: 'GET',
       headers: {
         'Authorization': `Bearer ${CONFIG.PAYSTACK_SECRET_KEY}`,
         'Content-Type': 'application/json'
@@ -87,45 +75,13 @@ async function verifyTransaction(reference) {
         success: true,
         verified: true,
         reference: data.data.reference,
-        amount: data.data.amount / 100,
-        customer: data.data.customer.email,
-        paid_at: data.data.paid_at,
         metadata: data.data.metadata
       };
     }
-    
-    return { success: true, verified: false };
+    return { success: true, verified: false, status: data.data?.status };
   } catch (error) {
     return { success: false, error: error.message };
   }
-}
-
-/**
- * Get GitHub raw URL for project file
- */
-function getProjectUrl(filename) {
-  return `https://raw.githubusercontent.com/${CONFIG.GITHUB_REPO}/${CONFIG.GITHUB_BRANCH}/${CONFIG.PROJECTS_FOLDER}/${filename}`;
-}
-
-/**
- * Parse filename to extract metadata
- * Format: CATEGORY_Title_Words_Here_Year.pdf
- */
-function parseFilename(filename) {
-  const parts = filename.replace('.pdf', '').split('_');
-  const categoryCode = parts[0] || 'OTH';
-  const year = parts[parts.length - 1] || '2024';
-  const title = parts.slice(1, -1).join(' ') || filename;
-  
-  return {
-    filename,
-    categoryCode,
-    category: CONFIG.CATEGORIES[categoryCode] || 'Other',
-    title: title.replace(/-/g, ' '),
-    year,
-    displayName: title.replace(/-/g, ' '),
-    downloadUrl: getProjectUrl(filename)
-  };
 }
 
 /**
@@ -134,19 +90,19 @@ function parseFilename(filename) {
 function getPublicConfig() {
   return {
     PAYSTACK_PUBLIC_KEY: CONFIG.PAYSTACK_PUBLIC_KEY,
-    PRICE_NAIRA: 2500,
-    CATEGORIES: CONFIG.CATEGORIES,
+    PRICE_KOBO: CONFIG.PRICE_KOBO,
     GITHUB_REPO: CONFIG.GITHUB_REPO,
     GITHUB_BRANCH: CONFIG.GITHUB_BRANCH,
     PROJECTS_FOLDER: CONFIG.PROJECTS_FOLDER
   };
 }
 
-module.exports = {
-  initializeTransaction,
-  verifyTransaction,
-  getProjectUrl,
-  parseFilename,
-  getPublicConfig,
-  CONFIG
-};
+// Node.js exports
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    initializeTransaction,
+    verifyTransaction,
+    getPublicConfig,
+    CONFIG
+  };
+}
