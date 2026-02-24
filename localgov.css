@@ -11,7 +11,7 @@
   --success: #10b981;
   --error: #ef4444;
   --warning: #f59e0b;
-  --price-color: #dc2626;
+  --price-color: #2556cc;
   --radius: 16px;
 }
 
@@ -106,13 +106,13 @@ nav {
 
 /* PRICE BANNER */
 .price-banner {
-  background: linear-gradient(135deg, var(--price-color) 0%, #b91c1c 100%);
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
   color: white;
   padding: 30px;
   border-radius: var(--radius);
   text-align: center;
   margin-bottom: 30px;
-  box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
+  box-shadow: 0 10px 30px rgba(10,31,92,0.3);
 }
 
 .price-highlight {
@@ -288,13 +288,13 @@ nav {
 }
 
 .buy-btn {
-  background: linear-gradient(135deg, var(--price-color) 0%, #b91c1c 100%);
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
   color: white;
 }
 
 .buy-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+  box-shadow: 0 8px 20px rgba(10,31,92,0.3);
 }
 
 .download-btn-sm {
@@ -373,9 +373,9 @@ nav {
 }
 
 .warning-box.critical {
-  background: rgba(220,38,38,0.08);
-  border-color: rgba(220,38,38,0.3);
-  color: var(--price-color);
+  background: rgba(37, 86, 204, 0.08);
+  border-color: rgba(37, 86, 204, 0.3);
+  color: var(--blue);
   font-weight: 500;
 }
 
@@ -449,7 +449,7 @@ nav {
   width: 100%;
   position: relative;
   animation: scaleIn 0.3s ease;
-  border: 3px solid var(--price-color);
+  border: 3px solid var(--blue-light);
 }
 
 @keyframes scaleIn {
@@ -533,7 +533,7 @@ nav {
 .confirm-btn {
   width: 100%;
   padding: 18px;
-  background: linear-gradient(135deg, var(--price-color) 0%, #b91c1c 100%);
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
   color: white;
   border: none;
   border-radius: 12px;
