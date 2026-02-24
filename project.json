@@ -1,0 +1,77 @@
+{
+  "categories": ["NIN", "CAC", "JAMB", "LG_ID", "CV", "Business", "Education", "Legal"],
+  "projects": [
+    {
+      "id": "nin-verification-template",
+      "name": "NIN Verification Slip Template",
+      "category": "NIN",
+      "price": 2500,
+      "driveId": "YOUR_GOOGLE_DRIVE_FILE_ID_HERE",
+      "description": "Professional NIN verification slip template with official formatting"
+    },
+    {
+      "id": "cac-registration-kit",
+      "name": "CAC Business Registration Kit",
+      "category": "CAC",
+      "price": 2500,
+      "driveId": "YOUR_GOOGLE_DRIVE_FILE_ID_HERE",
+      "description": "Complete CAC registration document templates and guides"
+    },
+    {
+      "id": "jamb-admission-letter",
+      "name": "JAMB Admission Letter Template",
+      "category": "JAMB",
+      "price": 2500,
+      "driveId": "YOUR_GOOGLE_DRIVE_FILE_ID_HERE",
+      "description": "Official JAMB admission letter format template"
+    },
+    {
+      "id": "lagos-island-lg",
+      "name": "Lagos Island LG ID Form",
+      "category": "LG_ID",
+      "price": 2500,
+      "driveId": "YOUR_GOOGLE_DRIVE_FILE_ID_HERE",
+      "description": "Lagos Island Local Government Identification form template"
+    },
+    {
+      "id": "ikeja-lg",
+      "name": "Ikeja LG ID Form",
+      "category": "LG_ID",
+      "price": 2500,
+      "driveId": "YOUR_GOOGLE_DRIVE_FILE_ID_HERE",
+      "description": "Ikeja Local Government Identification form template"
+    },
+    {
+      "id": "professional-cv-template",
+      "name": "Professional CV Template Pack",
+      "category": "CV",
+      "price": 2500,
+      "driveId": "YOUR_GOOGLE_DRIVE_FILE_ID_HERE",
+      "description": "5 modern CV templates for professionals"
+    },
+    {
+      "id": "business-proposal-template",
+      "name": "Business Proposal Template",
+      "category": "Business",
+      "price": 2500,
+      "driveId": "YOUR_GOOGLE_DRIVE_FILE_ID_HERE",
+      "description": "Complete business proposal format with financial projections"
+    },
+    {
+      "id": "project-report-template",
+      "name": "Final Year Project Report Template",
+      "category": "Education",
+      "price": 2500,
+      "driveId": "YOUR_GOOGLE_DRIVE_FILE_ID_HERE",
+      "description": "University standard final year project report formatting"
+    },
+    {
+      "id": "affidavit-template",
+      "name": "Legal Affidavit Template",
+      "category": "Legal",
+      "price": 2500,
+      "driveId": "YOUR_GOOGLE_DRIVE_FILE_ID_HERE",
+      "description": "Standard legal affidavit format for official use"
+    }
+  ]
+}
