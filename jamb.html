@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JAMB Services – Cyber Sweeft</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root{--blue:#0a1f5c;--blue-mid:#1a3a8f;--blue-light:#2556cc;--accent:#3b82f6;--white:#ffffff;--off-white:#f4f7ff;--text-muted:#6b7db3;--card-bg:#ffffff;--shadow:0 8px 40px rgba(10,31,92,0.12);}
+  [data-theme="dark"]{--white:#0d1b3e;--off-white:#0a1530;--card-bg:#132050;--text-muted:#8fa8d8;--shadow:0 8px 40px rgba(0,0,0,0.4);}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--blue);transition:background 0.3s,color 0.3s;}
+  [data-theme="dark"] body{color:#c8d8ff;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,31,92,0.97);backdrop-filter:blur(12px);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;}
+  .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:white;letter-spacing:1px;text-decoration:none;}
+  .logo span{color:var(--accent);}
+  .nav-right{display:flex;align-items:center;gap:12px;}
+  .back-btn{background:rgba(255,255,255,0.1);border:none;border-radius:10px;padding:8px 16px;color:white;cursor:pointer;font-size:0.85rem;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;text-decoration:none;transition:background 0.2s;}
+  .back-btn:hover{background:rgba(255,255,255,0.2);}
+  .theme-toggle{background:rgba(255,255,255,0.1);border:none;border-radius:50%;width:38px;height:38px;color:white;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;}
+  .page-hero{padding:120px 5% 60px;background:linear-gradient(135deg,var(--blue) 0%,var(--blue-mid) 100%);text-align:center;color:white;}
+  .page-hero .icon{font-size:3rem;margin-bottom:16px;}
+  .page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:800;margin-bottom:12px;}
+  .page-hero p{color:rgba(255,255,255,0.75);font-size:1rem;max-width:520px;margin:0 auto;}
+  .badge{display:inline-block;background:rgba(59,130,246,0.2);border:1px solid rgba(59,130,246,0.4);border-radius:50px;padding:5px 16px;font-size:0.78rem;color:#93c5fd;margin-bottom:16px;letter-spacing:1px;}
+  .services-container{max-width:950px;margin:0 auto;padding:60px 5%;}
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+  .sub-card{background:var(--card-bg);border-radius:20px;padding:28px;box-shadow:var(--shadow);border:1px solid rgba(10,31,92,0.07);transition:transform 0.3s;position:relative;overflow:hidden;}
+  .sub-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue-light),var(--accent));}
+  .sub-card:hover{transform:translateY(-4px);}
+  .sub-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--blue),var(--blue-light));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:white;margin-bottom:14px;}
+  .sub-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--blue);margin-bottom:6px;}
+  [data-theme="dark"] .sub-card h3{color:#93c5fd;}
+  .price-tag{font-size:0.85rem;font-weight:700;color:var(--accent);margin-bottom:12px;}
+  .sub-card p{font-size:0.82rem;color:var(--text-muted);line-height:1.55;margin-bottom:18px;}
+  .apply-btn{background:linear-gradient(135deg,var(--blue),var(--blue-light));color:white;border:none;border-radius:10px;padding:10px 18px;font-size:0.85rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;font-family:'DM Sans',sans-serif;transition:opacity 0.2s;width:fit-content;}
+  .apply-btn:hover{opacity:0.85;}
+
+  /* MODAL */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(6,15,46,0.7);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;padding:20px;}
+  .modal-overlay.active{display:flex;}
+  .modal{background:var(--card-bg);border-radius:24px;padding:36px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;animation:slideUp 0.3s ease;}
+  .modal h2{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--blue);margin-bottom:4px;}
+  [data-theme="dark"] .modal h2{color:#93c5fd;}
+  .modal .price-info{font-size:0.82rem;color:var(--accent);font-weight:600;margin-bottom:20px;}
+  .form-group{margin-bottom:16px;}
+  .form-group label{display:block;font-size:0.82rem;font-weight:600;color:var(--blue);margin-bottom:6px;}
+  [data-theme="dark"] .form-group label{color:#93c5fd;}
+  .form-group input,.form-group select{width:100%;padding:12px 14px;border:1.5px solid rgba(10,31,92,0.15);border-radius:12px;font-size:0.9rem;font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--blue);outline:none;transition:border-color 0.2s;}
+  [data-theme="dark"] .form-group input,[data-theme="dark"] .form-group select{background:#0d1b3e;color:#c8d8ff;border-color:rgba(255,255,255,0.1);}
+  .form-group input:focus,.form-group select:focus{border-color:var(--accent);}
+  .modal-actions{display:flex;gap:12px;margin-top:20px;}
+  .btn-send{flex:1;background:linear-gradient(135deg,#25d366,#128C7E);color:white;border:none;border-radius:12px;padding:13px;font-size:0.92rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:'DM Sans',sans-serif;}
+  .btn-cancel{background:var(--off-white);color:var(--text-muted);border:none;border-radius:12px;padding:13px 18px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.88rem;}
+  [data-theme="dark"] .btn-cancel{background:#1e3060;}
+  @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">CYBER <span>SWEEFT</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"><i class="fas fa-moon"></i></button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="badge">⏱️ 30 Minutes Delivery</div>
+  <div class="icon">🎓</div>
+  <h1>JAMB Services</h1>
+  <p>Get access to all your JAMB documents quickly and securely — delivered in just 30 minutes.</p>
+</div>
+
+<div class="services-container">
+  <div class="services-grid">
+
+    <div class="sub-card">
+      <div class="sub-icon"><i class="fas fa-file-alt"></i></div>
+      <h3>JAMB Admission Letter</h3>
+      <div class="price-tag">₦2,500</div>
+      <p>Official JAMB admission letter for your records or institution submission.</p>
+      <button class="apply-btn" onclick="openModal('admission','JAMB Admission Letter','₦2,500')"><i class="fab fa-whatsapp"></i> Order Now</button>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-icon"><i class="fas fa-poll"></i></div>
+      <h3>JAMB Result</h3>
+      <div class="price-tag">₦3,000</div>
+      <p>Retrieve your official JAMB UTME result slip quickly.</p>
+      <button class="apply-btn" onclick="openModal('result','JAMB Result','₦3,000')"><i class="fab fa-whatsapp"></i> Order Now</button>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-icon"><i class="fas fa-receipt"></i></div>
+      <h3>JAMB Registration Slip</h3>
+      <div class="price-tag">₦1,000</div>
+      <p>Get a copy of your JAMB registration slip for any year.</p>
+      <button class="apply-btn" onclick="openModal('regslip','JAMB Registration Slip','₦1,000')"><i class="fab fa-whatsapp"></i> Order Now</button>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-icon"><i class="fas fa-print"></i></div>
+      <h3>JAMB Reprinting</h3>
+      <div class="price-tag">₦1,500</div>
+      <p>Reprint UTME Registration Slip, DE Slip, Original Result, Change of Course Slip & more.</p>
+      <button class="apply-btn" onclick="openModal('reprint','JAMB Reprinting','₦1,500')"><i class="fab fa-whatsapp"></i> Order Now</button>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-icon"><i class="fas fa-check-circle"></i></div>
+      <h3>Check Admission Status</h3>
+      <div class="price-tag">₦1,500</div>
+      <p>Verify your JAMB admission status instantly.</p>
+      <button class="apply-btn" onclick="openModal('status','Check JAMB Admission Status','₦1,500')"><i class="fab fa-whatsapp"></i> Order Now</button>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-icon"><i class="fas fa-image"></i></div>
+      <h3>O'level Result Screenshot</h3>
+      <div class="price-tag">₦1,500</div>
+      <p>Get a screenshot of your JAMB O'level result as uploaded on the portal.</p>
+      <button class="apply-btn" onclick="openModal('olevel','JAMB O'level Result Screenshot','₦1,500')"><i class="fab fa-whatsapp"></i> Order Now</button>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-icon"><i class="fas fa-key"></i></div>
+      <h3>Profile Code Retrieval</h3>
+      <div class="price-tag">₦1,500</div>
+      <p>Retrieve your JAMB profile code quickly for any use.</p>
+      <button class="apply-btn" onclick="openModal('profile','JAMB Profile Code Retrieval','₦1,500')"><i class="fab fa-whatsapp"></i> Order Now</button>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-icon"><i class="fas fa-hashtag"></i></div>
+      <h3>Reg Number Retrieval</h3>
+      <div class="price-tag">₦1,500</div>
+      <p>Retrieve your JAMB registration number quickly.</p>
+      <button class="apply-btn" onclick="openModal('regno','JAMB Registration Number Retrieval','₦1,500')"><i class="fab fa-whatsapp"></i> Order Now</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- UNIVERSAL JAMB MODAL -->
+<div class="modal-overlay" id="jamb-modal">
+  <div class="modal">
+    <h2 id="modal-title">JAMB Service</h2>
+    <div class="price-info" id="modal-price"></div>
+    <div class="form-group"><label>Full Name *</label><input type="text" id="jfullname" placeholder="Full legal name"></div>
+    <div class="form-group"><label>Profile Code or JAMB Reg No. *</label><input type="text" id="jcode" placeholder="Profile code or Registration number"></div>
+    <div class="form-group"><label>JAMB Year *</label><input type="text" id="jyear" placeholder="e.g. 2023"></div>
+    <div class="form-group"><label>Your WhatsApp Number *</label><input type="tel" id="jwa" placeholder="+234..."></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeJambModal()">Cancel</button>
+      <button class="btn-send" onclick="sendJamb()"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const WA = '2348144779998';
+let currentService = '', currentPrice = '';
+
+function openModal(type, name, price) {
+  currentService = name;
+  currentPrice = price;
+  document.getElementById('modal-title').textContent = name;
+  document.getElementById('modal-price').textContent = 'Cost: ' + price;
+  document.getElementById('jamb-modal').classList.add('active');
+}
+function closeJambModal() { document.getElementById('jamb-modal').classList.remove('active'); }
+
+function sendJamb() {
+  const name = document.getElementById('jfullname').value.trim();
+  const code = document.getElementById('jcode').value.trim();
+  const year = document.getElementById('jyear').value.trim();
+  const wa = document.getElementById('jwa').value.trim();
+  if (!name || !code || !year || !wa) { alert('Please fill all required fields.'); return; }
+  const msg = `*JAMB SERVICES*\n*Service: ${currentService}*\n\n▪️ Full Name: ${name}\n▪️ Profile Code / Reg No.: ${code}\n▪️ JAMB Year: ${year}\n▪️ WhatsApp Number: ${wa}\n\n_Cost: ${currentPrice}_\n_Delivery: 30 Minutes_`;
+  window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
+}
+
+document.getElementById('jamb-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('jamb-modal')) closeJambModal();
+});
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (html.getAttribute('data-theme')==='dark') { html.removeAttribute('data-theme'); btn.innerHTML='<i class="fas fa-moon"></i>'; }
+  else { html.setAttribute('data-theme','dark'); btn.innerHTML='<i class="fas fa-sun"></i>'; }
+}
+</script>
+</body>
+</html>

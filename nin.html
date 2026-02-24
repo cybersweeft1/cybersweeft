@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NIN Services – Cyber Sweeft</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --blue: #0a1f5c; --blue-mid: #1a3a8f; --blue-light: #2556cc;
+    --accent: #3b82f6; --white: #ffffff; --off-white: #f4f7ff;
+    --text-muted: #6b7db3; --card-bg: #ffffff; --shadow: 0 8px 40px rgba(10,31,92,0.12);
+  }
+  [data-theme="dark"] { --white: #0d1b3e; --off-white: #0a1530; --card-bg: #132050; --text-muted: #8fa8d8; --shadow: 0 8px 40px rgba(0,0,0,0.4); }
+  * { margin:0;padding:0;box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:var(--off-white); color:var(--blue); transition:background 0.3s,color 0.3s; }
+  [data-theme="dark"] body { color:#c8d8ff; }
+  nav { position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,31,92,0.97);backdrop-filter:blur(12px);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px; }
+  .logo { font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:white;letter-spacing:1px;text-decoration:none; }
+  .logo span { color:var(--accent); }
+  .nav-right { display:flex;align-items:center;gap:12px; }
+  .back-btn { background:rgba(255,255,255,0.1);border:none;border-radius:10px;padding:8px 16px;color:white;cursor:pointer;font-size:0.85rem;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;text-decoration:none;transition:background 0.2s; }
+  .back-btn:hover { background:rgba(255,255,255,0.2); }
+  .theme-toggle { background:rgba(255,255,255,0.1);border:none;border-radius:50%;width:38px;height:38px;color:white;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center; }
+
+  .page-hero { padding: 120px 5% 60px; background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%); text-align:center; color:white; }
+  .page-hero .icon { font-size:3rem; margin-bottom:16px; }
+  .page-hero h1 { font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:800;margin-bottom:12px; }
+  .page-hero p { color:rgba(255,255,255,0.75);font-size:1rem;max-width:500px;margin:0 auto; }
+
+  .services-container { max-width:900px;margin:0 auto;padding:60px 5%; }
+  .sub-services { display:grid;gap:24px; }
+
+  .sub-card { background:var(--card-bg);border-radius:20px;padding:32px;box-shadow:var(--shadow);border:1px solid rgba(10,31,92,0.07);transition:transform 0.3s; }
+  .sub-card:hover { transform:translateY(-4px); }
+  .sub-card-header { display:flex;align-items:center;gap:16px;margin-bottom:16px; }
+  .sub-icon { width:48px;height:48px;background:linear-gradient(135deg,var(--blue),var(--blue-light));border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:white;flex-shrink:0; }
+  .sub-card h3 { font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--blue); }
+  [data-theme="dark"] .sub-card h3 { color:#93c5fd; }
+  .sub-card .price { font-size:0.8rem;color:var(--accent);font-weight:600;margin-top:2px; }
+  .sub-card .desc { font-size:0.88rem;color:var(--text-muted);margin-bottom:20px;line-height:1.6; }
+  .apply-btn { background:linear-gradient(135deg,var(--blue),var(--blue-light));color:white;border:none;border-radius:12px;padding:12px 24px;font-size:0.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:'DM Sans',sans-serif;transition:opacity 0.2s; }
+  .apply-btn:hover { opacity:0.85; }
+
+  /* MODAL */
+  .modal-overlay { display:none;position:fixed;inset:0;background:rgba(6,15,46,0.7);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;padding:20px; }
+  .modal-overlay.active { display:flex; }
+  .modal { background:var(--card-bg);border-radius:24px;padding:40px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;animation:slideUp 0.3s ease; }
+  .modal h2 { font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--blue);margin-bottom:6px; }
+  [data-theme="dark"] .modal h2 { color:#93c5fd; }
+  .modal .subtitle { font-size:0.85rem;color:var(--text-muted);margin-bottom:28px; }
+  .form-group { margin-bottom:18px; }
+  .form-group label { display:block;font-size:0.82rem;font-weight:600;color:var(--blue);margin-bottom:6px; }
+  [data-theme="dark"] .form-group label { color:#93c5fd; }
+  .form-group input, .form-group select {
+    width:100%;padding:12px 14px;border:1.5px solid rgba(10,31,92,0.15);border-radius:12px;
+    font-size:0.9rem;font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--blue);
+    outline:none;transition:border-color 0.2s;
+  }
+  [data-theme="dark"] .form-group input, [data-theme="dark"] .form-group select { background:#0d1b3e;color:#c8d8ff;border-color:rgba(255,255,255,0.1); }
+  .form-group input:focus, .form-group select:focus { border-color:var(--accent); }
+  .modal-actions { display:flex;gap:12px;margin-top:24px; }
+  .btn-send { flex:1;background:linear-gradient(135deg,#25d366,#128C7E);color:white;border:none;border-radius:12px;padding:14px;font-size:0.95rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:'DM Sans',sans-serif; }
+  .btn-cancel { background:var(--off-white);color:var(--text-muted);border:none;border-radius:12px;padding:14px 20px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.9rem; }
+  [data-theme="dark"] .btn-cancel { background:#1e3060; }
+
+  @keyframes slideUp { from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)} }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">CYBER <span>SWEEFT</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"><i class="fas fa-moon"></i></button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="icon">🪪</div>
+  <h1>NIN Services</h1>
+  <p>Fast and accurate NIN verification, search, and document retrieval services.</p>
+</div>
+
+<div class="services-container">
+  <div class="sub-services">
+
+    <div class="sub-card">
+      <div class="sub-card-header">
+        <div class="sub-icon"><i class="fas fa-id-card"></i></div>
+        <div>
+          <h3>NIN Verification Slip</h3>
+          <div class="price">₦1,500 — Regular, Improved, Premium & VNIN Slip</div>
+        </div>
+      </div>
+      <p class="desc">Returns the full name, date of birth, and other details of the supplied NIN if valid.</p>
+      <button class="apply-btn" onclick="openModal('slip')"><i class="fab fa-whatsapp"></i> Order Now</button>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-header">
+        <div class="sub-icon"><i class="fas fa-phone"></i></div>
+        <div>
+          <h3>NIN Search Using Phone Number</h3>
+          <div class="price">₦1,500 — Regular, Improved, Premium & VNIN Slip</div>
+        </div>
+      </div>
+      <p class="desc">Retrieve NIN details using a phone number. Returns full name, DOB, and more.</p>
+      <button class="apply-btn" onclick="openModal('phone')"><i class="fab fa-whatsapp"></i> Order Now</button>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-header">
+        <div class="sub-icon"><i class="fas fa-search"></i></div>
+        <div>
+          <h3>NIN Demo Search</h3>
+          <div class="price">₦2,000 — Regular, Improved, Premium & VNIN Slip</div>
+        </div>
+      </div>
+      <p class="desc">Search NIN records using personal details like name, gender, and date of birth.</p>
+      <button class="apply-btn" onclick="openModal('demo')"><i class="fab fa-whatsapp"></i> Order Now</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL: NIN Slip -->
+<div class="modal-overlay" id="modal-slip">
+  <div class="modal">
+    <h2>NIN Verification Slip</h2>
+    <p class="subtitle">Fill in the details below and we'll open WhatsApp with your order pre-filled.</p>
+    <div class="form-group"><label>NIN Number *</label><input type="text" id="slip-nin" placeholder="11-digit NIN number" maxlength="11"></div>
+    <div class="form-group"><label>Slip Type *</label>
+      <select id="slip-type">
+        <option value="Regular Slip">Regular Slip</option>
+        <option value="Improved Slip">Improved Slip</option>
+        <option value="Premium Slip">Premium Slip</option>
+        <option value="VNIN Verification Slip">VNIN Verification Slip</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Your WhatsApp Number *</label><input type="tel" id="slip-wa" placeholder="+234..."></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('slip')">Cancel</button>
+      <button class="btn-send" onclick="sendSlip()"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Phone Search -->
+<div class="modal-overlay" id="modal-phone">
+  <div class="modal">
+    <h2>NIN Search via Phone Number</h2>
+    <p class="subtitle">Fill in the details below and we'll open WhatsApp with your order pre-filled.</p>
+    <div class="form-group"><label>Phone Number *</label><input type="tel" id="phone-num" placeholder="+234..."></div>
+    <div class="form-group"><label>Slip Type *</label>
+      <select id="phone-type">
+        <option value="Regular Slip">Regular Slip</option>
+        <option value="Improved Slip">Improved Slip</option>
+        <option value="Premium Slip">Premium Slip</option>
+        <option value="VNIN Verification Slip">VNIN Verification Slip</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Your WhatsApp Number *</label><input type="tel" id="phone-wa" placeholder="+234..."></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('phone')">Cancel</button>
+      <button class="btn-send" onclick="sendPhone()"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Demo Search -->
+<div class="modal-overlay" id="modal-demo">
+  <div class="modal">
+    <h2>NIN Demo Search</h2>
+    <p class="subtitle">Fill in the details below and we'll open WhatsApp with your order pre-filled.</p>
+    <div class="form-group"><label>First Name *</label><input type="text" id="demo-fn" placeholder="First name"></div>
+    <div class="form-group"><label>Surname *</label><input type="text" id="demo-sn" placeholder="Surname"></div>
+    <div class="form-group"><label>Gender *</label>
+      <select id="demo-gender"><option value="Male">Male</option><option value="Female">Female</option></select>
+    </div>
+    <div class="form-group"><label>Date of Birth *</label><input type="date" id="demo-dob"></div>
+    <div class="form-group"><label>Slip Type *</label>
+      <select id="demo-type">
+        <option value="Regular Slip">Regular Slip</option>
+        <option value="Improved Slip">Improved Slip</option>
+        <option value="Premium Slip">Premium Slip</option>
+        <option value="VNIN Verification Slip">VNIN Verification Slip</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Your WhatsApp Number *</label><input type="tel" id="demo-wa" placeholder="+234..."></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('demo')">Cancel</button>
+      <button class="btn-send" onclick="sendDemo()"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const WA = '2348144779998';
+function openModal(id) { document.getElementById('modal-'+id).classList.add('active'); }
+function closeModal(id) { document.getElementById('modal-'+id).classList.remove('active'); }
+
+function sendWA(msg) {
+  window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
+}
+function sendSlip() {
+  const nin = document.getElementById('slip-nin').value.trim();
+  const type = document.getElementById('slip-type').value;
+  const wa = document.getElementById('slip-wa').value.trim();
+  if (!nin || !wa) { alert('Please fill all required fields.'); return; }
+  const msg = `*NIN SERVICES*\n*Service: NIN Verification Slip*\n\n▪️ Slip Type: ${type}\n▪️ NIN Number: ${nin}\n▪️ WhatsApp Number: ${wa}\n\n_Unit Cost: ₦1,500_`;
+  sendWA(msg);
+}
+function sendPhone() {
+  const num = document.getElementById('phone-num').value.trim();
+  const type = document.getElementById('phone-type').value;
+  const wa = document.getElementById('phone-wa').value.trim();
+  if (!num || !wa) { alert('Please fill all required fields.'); return; }
+  const msg = `*NIN SERVICES*\n*Service: NIN Search Using Phone Number*\n\n▪️ Slip Type: ${type}\n▪️ Phone Number: ${num}\n▪️ WhatsApp Number: ${wa}\n\n_Unit Cost: ₦1,500_`;
+  sendWA(msg);
+}
+function sendDemo() {
+  const fn = document.getElementById('demo-fn').value.trim();
+  const sn = document.getElementById('demo-sn').value.trim();
+  const gender = document.getElementById('demo-gender').value;
+  const dob = document.getElementById('demo-dob').value;
+  const type = document.getElementById('demo-type').value;
+  const wa = document.getElementById('demo-wa').value.trim();
+  if (!fn || !sn || !dob || !wa) { alert('Please fill all required fields.'); return; }
+  const msg = `*NIN SERVICES*\n*Service: NIN Demo Search*\n\n▪️ Slip Type: ${type}\n▪️ First Name: ${fn}\n▪️ Surname: ${sn}\n▪️ Gender: ${gender}\n▪️ Date of Birth: ${dob}\n▪️ WhatsApp Number: ${wa}\n\n_Unit Cost: ₦2,000_`;
+  sendWA(msg);
+}
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (html.getAttribute('data-theme')==='dark') { html.removeAttribute('data-theme'); btn.innerHTML='<i class="fas fa-moon"></i>'; }
+  else { html.setAttribute('data-theme','dark'); btn.innerHTML='<i class="fas fa-sun"></i>'; }
+}
+// close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(o => {
+  o.addEventListener('click', e => { if(e.target===o) o.classList.remove('active'); });
+});
+</script>
+</body>
+</html>

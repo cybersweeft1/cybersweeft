@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NERD Enrollment – Cyber Sweeft</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root{--blue:#0a1f5c;--blue-mid:#1a3a8f;--blue-light:#2556cc;--accent:#3b82f6;--white:#ffffff;--off-white:#f4f7ff;--text-muted:#6b7db3;--card-bg:#ffffff;--shadow:0 8px 40px rgba(10,31,92,0.12);}
+  [data-theme="dark"]{--white:#0d1b3e;--off-white:#0a1530;--card-bg:#132050;--text-muted:#8fa8d8;--shadow:0 8px 40px rgba(0,0,0,0.4);}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--blue);transition:background 0.3s,color 0.3s;}
+  [data-theme="dark"] body{color:#c8d8ff;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,31,92,0.97);backdrop-filter:blur(12px);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;}
+  .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:white;letter-spacing:1px;text-decoration:none;}
+  .logo span{color:var(--accent);}
+  .nav-right{display:flex;align-items:center;gap:12px;}
+  .back-btn{background:rgba(255,255,255,0.1);border:none;border-radius:10px;padding:8px 16px;color:white;cursor:pointer;font-size:0.85rem;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;text-decoration:none;transition:background 0.2s;}
+  .back-btn:hover{background:rgba(255,255,255,0.2);}
+  .theme-toggle{background:rgba(255,255,255,0.1);border:none;border-radius:50%;width:38px;height:38px;color:white;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;}
+  .page-hero{padding:120px 5% 60px;background:linear-gradient(135deg,var(--blue) 0%,var(--blue-mid) 100%);text-align:center;color:white;}
+  .page-hero .icon{font-size:3rem;margin-bottom:16px;}
+  .page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:800;margin-bottom:12px;}
+  .page-hero p{color:rgba(255,255,255,0.75);font-size:1rem;max-width:520px;margin:0 auto;}
+  .badge{display:inline-block;background:rgba(59,130,246,0.2);border:1px solid rgba(59,130,246,0.4);border-radius:50px;padding:5px 16px;font-size:0.78rem;color:#93c5fd;margin-bottom:16px;letter-spacing:1px;}
+  .price-badge{display:inline-block;background:rgba(59,246,130,0.15);border:1px solid rgba(59,246,130,0.3);border-radius:50px;padding:6px 20px;font-size:0.9rem;color:#6ee7b7;font-weight:700;margin-top:12px;}
+  .form-container{max-width:760px;margin:0 auto;padding:60px 5%;}
+  .form-card{background:var(--card-bg);border-radius:24px;padding:40px;box-shadow:var(--shadow);}
+  .section-title{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;color:var(--blue-light);letter-spacing:1.5px;text-transform:uppercase;margin:28px 0 16px;padding-bottom:8px;border-bottom:2px solid rgba(37,86,204,0.12);}
+  [data-theme="dark"] .section-title{color:#60a5fa;}
+  .section-title:first-child{margin-top:0;}
+  .form-group{margin-bottom:15px;}
+  .form-group label{display:block;font-size:0.82rem;font-weight:600;color:var(--blue);margin-bottom:6px;}
+  [data-theme="dark"] .form-group label{color:#93c5fd;}
+  .form-group input,.form-group select{width:100%;padding:12px 14px;border:1.5px solid rgba(10,31,92,0.15);border-radius:12px;font-size:0.9rem;font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--blue);outline:none;transition:border-color 0.2s;}
+  [data-theme="dark"] .form-group input,[data-theme="dark"] .form-group select{background:#0d1b3e;color:#c8d8ff;border-color:rgba(255,255,255,0.1);}
+  .form-group input:focus,.form-group select:focus{border-color:var(--accent);}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+  @media(max-width:600px){.form-row,.form-row-3{grid-template-columns:1fr;}}
+  .docs-info{background:rgba(59,130,246,0.08);border-left:4px solid var(--accent);border-radius:8px;padding:14px 16px;font-size:0.85rem;color:var(--text-muted);margin:16px 0;line-height:1.7;}
+  .send-btn{width:100%;background:linear-gradient(135deg,#25d366,#128C7E);color:white;border:none;border-radius:14px;padding:16px;font-size:1rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'DM Sans',sans-serif;margin-top:28px;transition:opacity 0.2s;}
+  .send-btn:hover{opacity:0.9;}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">CYBER <span>SWEEFT</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"><i class="fas fa-moon"></i></button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="badge">✅ NERD Enrollment</div>
+  <div class="icon">🎓</div>
+  <h1>NERD Enrollment Form</h1>
+  <p>Complete the NERD enrollment form below. All sections must be filled accurately.</p>
+  <div class="price-badge">₦13,000</div>
+</div>
+
+<div class="form-container">
+  <div class="form-card">
+
+    <div class="section-title">Personal Data</div>
+    <div class="form-row-3">
+      <div class="form-group"><label>Title *</label>
+        <select id="title"><option value="Mr">Mr</option><option value="Mrs">Mrs</option><option value="Miss">Miss</option></select>
+      </div>
+      <div class="form-group"><label>Sex *</label>
+        <select id="sex"><option value="Male">Male</option><option value="Female">Female</option></select>
+      </div>
+      <div class="form-group"><label>Marital Status *</label>
+        <select id="marital"><option value="Single">Single</option><option value="Married">Married</option><option value="Divorced">Divorced</option></select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>First Name *</label><input type="text" id="firstname" placeholder="First name"></div>
+      <div class="form-group"><label>Middle Name</label><input type="text" id="middlename" placeholder="Middle name (optional)"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Surname *</label><input type="text" id="surname" placeholder="Surname"></div>
+      <div class="form-group"><label>Date of Birth *</label><input type="date" id="dob"></div>
+    </div>
+    <div class="form-group"><label>NIN (11 Digits) *</label><input type="text" id="nin" placeholder="11-digit NIN" maxlength="11"></div>
+
+    <div class="section-title">Contact Information</div>
+    <div class="form-row">
+      <div class="form-group"><label>Nationality *</label><input type="text" id="nationality" placeholder="e.g. Nigerian"></div>
+      <div class="form-group"><label>State of Origin *</label><input type="text" id="state-origin" placeholder="State"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>LGA *</label><input type="text" id="lga" placeholder="Local Government Area"></div>
+      <div class="form-group"><label>Town/City *</label><input type="text" id="town" placeholder="Town or City"></div>
+    </div>
+    <div class="form-group"><label>Residential Address *</label><input type="text" id="res-address" placeholder="Full residential address"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Email *</label><input type="email" id="email" placeholder="your@email.com"></div>
+      <div class="form-group"><label>Phone No. (+234) *</label><input type="tel" id="phone" placeholder="+234..."></div>
+    </div>
+
+    <div class="section-title">Next of Kin</div>
+    <div class="form-group"><label>Full Name *</label><input type="text" id="kin-name" placeholder="Next of kin full name"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Phone No. *</label><input type="tel" id="kin-phone" placeholder="+234..."></div>
+      <div class="form-group"><label>Email</label><input type="email" id="kin-email" placeholder="Next of kin email"></div>
+    </div>
+
+    <div class="section-title">Academic Data</div>
+    <div class="form-group"><label>Institution *</label><input type="text" id="institution" placeholder="Name of institution"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Faculty *</label><input type="text" id="faculty" placeholder="Faculty"></div>
+      <div class="form-group"><label>Department *</label><input type="text" id="department" placeholder="Department"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Programme Type *</label><input type="text" id="programme" placeholder="e.g. Full-time, Part-time"></div>
+      <div class="form-group"><label>HND Matric Number *</label><input type="text" id="matric" placeholder="Matric number"></div>
+    </div>
+    <div class="form-group"><label>Course of Study *</label><input type="text" id="course" placeholder="Your course of study"></div>
+
+    <div class="section-title">Documents (Send via WhatsApp)</div>
+    <div class="docs-info">
+      📸 White Background Passport Photograph<br>
+      🪪 Valid ID (NIN Slip)<br>
+      📄 Statement of Result<br><br>
+      <em>Please have these documents ready to send on WhatsApp after submitting this form.</em>
+    </div>
+
+    <div class="section-title">Project Upload</div>
+    <div class="docs-info">
+      📁 Soft copy of Project (PDF/DOC)<br>
+      ✍️ Signed Project Approval Page<br><br>
+      <em>These will be uploaded via WhatsApp after submission.</em>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Supervisor Title</label><input type="text" id="sup-title" placeholder="e.g. Dr., Prof."></div>
+      <div class="form-group"><label>Supervisor Full Name (Surname first) *</label><input type="text" id="sup-name" placeholder="Surname First Name"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Supervisor Phone No.</label><input type="tel" id="sup-phone" placeholder="+234..."></div>
+      <div class="form-group"><label>Supervisor Email</label><input type="email" id="sup-email" placeholder="supervisor@email.com"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>HOD Title</label><input type="text" id="hod-title" placeholder="e.g. Dr., Prof."></div>
+      <div class="form-group"><label>HOD Full Name (Surname first) *</label><input type="text" id="hod-name" placeholder="Surname First Name"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>HOD Phone No.</label><input type="tel" id="hod-phone" placeholder="+234..."></div>
+      <div class="form-group"><label>HOD Email</label><input type="email" id="hod-email" placeholder="hod@email.com"></div>
+    </div>
+
+    <div class="section-title">Your WhatsApp</div>
+    <div class="form-group"><label>Your WhatsApp Number *</label><input type="tel" id="wa-num" placeholder="+234..."></div>
+
+    <button class="send-btn" onclick="sendNerd()"><i class="fab fa-whatsapp"></i> Submit Enrollment via WhatsApp</button>
+  </div>
+</div>
+
+<script>
+const WA = '2348144779998';
+const f = (id) => document.getElementById(id).value.trim();
+function sendNerd() {
+  const required = ['firstname','surname','dob','nin','nationality','state-origin','lga','town','res-address','email','phone','kin-name','kin-phone','institution','faculty','department','programme','matric','course','wa-num'];
+  for (let r of required) { if (!f(r)) { alert('Please fill all required (*) fields.'); return; } }
+  const msg =
+`*NERD ENROLLMENT FORM*
+*Price: ₦13,000*
+
+*PERSONAL DATA*
+▪️ Title: ${f('title')}
+▪️ First Name: ${f('firstname')}
+▪️ Middle Name: ${f('middlename') || 'N/A'}
+▪️ Surname: ${f('surname')}
+▪️ Sex: ${f('sex')}
+▪️ Date of Birth: ${f('dob')}
+▪️ Marital Status: ${f('marital')}
+▪️ NIN: ${f('nin')}
+
+*CONTACT INFO*
+▪️ Nationality: ${f('nationality')}
+▪️ State of Origin: ${f('state-origin')}
+▪️ LGA: ${f('lga')}
+▪️ Town/City: ${f('town')}
+▪️ Residential Address: ${f('res-address')}
+▪️ Email: ${f('email')}
+▪️ Phone No: ${f('phone')}
+
+*NEXT OF KIN*
+▪️ Name: ${f('kin-name')}
+▪️ Phone No: ${f('kin-phone')}
+▪️ Email: ${f('kin-email') || 'N/A'}
+
+*ACADEMIC DATA*
+▪️ Institution: ${f('institution')}
+▪️ Faculty: ${f('faculty')}
+▪️ Department: ${f('department')}
+▪️ Programme Type: ${f('programme')}
+▪️ HND Matric Number: ${f('matric')}
+▪️ Course of Study: ${f('course')}
+
+*PROJECT SUPERVISOR*
+▪️ Title: ${f('sup-title') || 'N/A'}
+▪️ Full Name: ${f('sup-name')}
+▪️ Phone No: ${f('sup-phone') || 'N/A'}
+▪️ Email: ${f('sup-email') || 'N/A'}
+
+*HOD*
+▪️ Title: ${f('hod-title') || 'N/A'}
+▪️ Full Name: ${f('hod-name')}
+▪️ Phone No: ${f('hod-phone') || 'N/A'}
+▪️ Email: ${f('hod-email') || 'N/A'}
+
+▪️ WhatsApp Number: ${f('wa-num')}
+
+_Please send: White BG Passport, NIN Slip, Statement of Result, Project Soft Copy (PDF/DOC), Signed Approval Page via WhatsApp._
+
+"DISTANCE IS NOT A BARRIER"`;
+  window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
+}
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (html.getAttribute('data-theme')==='dark') { html.removeAttribute('data-theme'); btn.innerHTML='<i class="fas fa-moon"></i>'; }
+  else { html.setAttribute('data-theme','dark'); btn.innerHTML='<i class="fas fa-sun"></i>'; }
+}
+</script>
+</body>
+</html>
