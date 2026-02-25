@@ -204,8 +204,7 @@ function sendWA(msg) {
 function sendSlip() {
   const nin = document.getElementById('slip-nin').value.trim();
   const type = document.getElementById('slip-type').value;
-  const wa = document.getElementById('slip-wa').value.trim();
-  if (!nin || !wa) { alert('Please fill all required fields.'); return; }
+  if (!nin ) { alert('Please fill all required fields.'); return; }
   const msg = `*NIN SERVICES*\n*Service: NIN Verification Slip*\n\n▪️ Slip Type: ${type}\n▪️ NIN Number: ${nin}\n▪️ WhatsApp Number: ${wa}\n\n_Unit Cost: ₦1,500_`;
   sendWA(msg);
 }
