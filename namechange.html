@@ -64,7 +64,7 @@
     <div class="form-group"><label>Old Name (Current Full Name) *</label><input type="text" id="old-name" placeholder="Your current full legal name"></div>
     <div class="form-group"><label>New Name *</label><input type="text" id="new-name" placeholder="Your desired new full name"></div>
     <div class="form-group"><label>Reason for Change of Name *</label><textarea id="reason" rows="3" placeholder="e.g. Marriage, Correction of name, Personal preference..."></textarea></div>
-    <div class="form-group"><label>Your WhatsApp Number *</label><input type="tel" id="wa-num" placeholder="+234..."></div>
+    
     <button class="send-btn" onclick="sendNameChange()"><i class="fab fa-whatsapp"></i> Submit via WhatsApp</button>
   </div>
 </div>
@@ -75,16 +75,27 @@ function sendNameChange() {
   const old = document.getElementById('old-name').value.trim();
   const newn = document.getElementById('new-name').value.trim();
   const reason = document.getElementById('reason').value.trim();
-  const wa = document.getElementById('wa-num').value.trim();
-  if (!old || !newn || !reason || !wa) { alert('Please fill all required fields.'); return; }
-  const msg = `*NEWSPAPER CHANGE OF NAME*\n\n▪️ Old Name: ${old}\n▪️ New Name: ${newn}\n▪️ Reason for Change: ${reason}\n▪️ WhatsApp Number: ${wa}\n\n_Service Delivery: 48 Hours_`;
+  
+  if (!old || !newn || !reason) { 
+    alert('Please fill all required fields.'); 
+    return; 
+  }
+  
+  const msg = `*NEWSPAPER CHANGE OF NAME*\n\n▪️ Old Name: ${old}\n▪️ New Name: ${newn}\n▪️ Reason for Change: ${reason}\n\n_Service Delivery: 48 Hours_`;
+  
   window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
 }
+
 function toggleTheme() {
   const html = document.documentElement;
   const btn = document.getElementById('themeBtn');
-  if (html.getAttribute('data-theme')==='dark') { html.removeAttribute('data-theme'); btn.innerHTML='<i class="fas fa-moon"></i>'; }
-  else { html.setAttribute('data-theme','dark'); btn.innerHTML='<i class="fas fa-sun"></i>'; }
+  if (html.getAttribute('data-theme')==='dark') { 
+    html.removeAttribute('data-theme'); 
+    btn.innerHTML='<i class="fas fa-moon"></i>'; 
+  } else { 
+    html.setAttribute('data-theme','dark'); 
+    btn.innerHTML='<i class="fas fa-sun"></i>'; 
+  }
 }
 </script>
 </body>
