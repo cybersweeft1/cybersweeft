@@ -175,7 +175,7 @@ function sendJamb() {
   const name = document.getElementById('jfullname').value.trim();
   const code = document.getElementById('jcode').value.trim();
   const year = document.getElementById('jyear').value.trim();
-  const wa = document.getElementById('jwa').value.trim();
+ 
   if (!name || !code || !year || !wa) { alert('Please fill all required fields.'); return; }
   const msg = `*JAMB SERVICES*\n*Service: ${currentService}*\n\n▪️ Full Name: ${name}\n▪️ Profile Code / Reg No.: ${code}\n▪️ JAMB Year: ${year}\n▪️ WhatsApp Number: ${wa}\n\n_Cost: ${currentPrice}_\n_Delivery: 30 Minutes_`;
   window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
