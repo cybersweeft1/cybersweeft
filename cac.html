@@ -111,8 +111,11 @@
 const WA = '2348144779998';
 function sendCAC() {
   const f = (id) => document.getElementById(id).value.trim();
-  const required = ['biz1','biz2','biz-cat','fullname','dob','email','phone','state-origin','lga-origin','city-origin','res-address','biz-state','biz-lga','biz-city','biz-address','wa-num'];
+  // Removed 'wa-num' from the required array
+  const required = ['biz1','biz2','biz-cat','fullname','dob','email','phone','state-origin','lga-origin','city-origin','res-address','biz-state','biz-lga','biz-city','biz-address'];
+  
   for (let r of required) { if (!f(r)) { alert('Please fill all required fields.'); return; } }
+  
   const msg =
 `*CAC REGISTRATION SERVICE*
 
@@ -139,12 +142,12 @@ function sendCAC() {
 ▪️ Business Address: ${f('biz-address')}
 ▪️ Street Number: ${f('biz-street') || 'N/A'}
 
-▪️ WhatsApp Number: ${f('wa-num')}
-
 _Service Delivery: 6 Hours_
 _Please send: Passport Photo, Means of ID & Signature via WhatsApp_`;
+
   window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
 }
+
 function toggleTheme() {
   const html = document.documentElement;
   const btn = document.getElementById('themeBtn');
