@@ -151,9 +151,6 @@
       <div class="form-group"><label>HOD Email</label><input type="email" id="hod-email" placeholder="hod@email.com"></div>
     </div>
 
-    <div class="section-title">Your WhatsApp</div>
-    <div class="form-group"><label>Your WhatsApp Number *</label><input type="tel" id="wa-num" placeholder="+234..."></div>
-
     <button class="send-btn" onclick="sendNerd()"><i class="fab fa-whatsapp"></i> Submit Enrollment via WhatsApp</button>
   </div>
 </div>
@@ -162,7 +159,7 @@
 const WA = '2348144779998';
 const f = (id) => document.getElementById(id).value.trim();
 function sendNerd() {
-  const required = ['firstname','surname','dob','nin','nationality','state-origin','lga','town','res-address','email','phone','kin-name','kin-phone','institution','faculty','department','programme','matric','course','wa-num'];
+  const required = ['firstname','surname','dob','nin','nationality','state-origin','lga','town','res-address','email','phone','kin-name','kin-phone','institution','faculty','department','programme','matric','course'];
   for (let r of required) { if (!f(r)) { alert('Please fill all required (*) fields.'); return; } }
   const msg =
 `*NERD ENROLLMENT FORM*
@@ -211,8 +208,6 @@ function sendNerd() {
 ▪️ Full Name: ${f('hod-name')}
 ▪️ Phone No: ${f('hod-phone') || 'N/A'}
 ▪️ Email: ${f('hod-email') || 'N/A'}
-
-▪️ WhatsApp Number: ${f('wa-num')}
 
 _Please send: White BG Passport, NIN Slip, Statement of Result, Project Soft Copy (PDF/DOC), Signed Approval Page via WhatsApp._
 
