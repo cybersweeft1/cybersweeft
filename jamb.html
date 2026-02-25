@@ -37,7 +37,6 @@
   .apply-btn{background:linear-gradient(135deg,var(--blue),var(--blue-light));color:white;border:none;border-radius:10px;padding:10px 18px;font-size:0.85rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;font-family:'DM Sans',sans-serif;transition:opacity 0.2s;width:fit-content;}
   .apply-btn:hover{opacity:0.85;}
 
-  /* MODAL */
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(6,15,46,0.7);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;padding:20px;}
   .modal-overlay.active{display:flex;}
   .modal{background:var(--card-bg);border-radius:24px;padding:36px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;animation:slideUp 0.3s ease;}
@@ -75,7 +74,6 @@
 
 <div class="services-container">
   <div class="services-grid">
-
     <div class="sub-card">
       <div class="sub-icon"><i class="fas fa-file-alt"></i></div>
       <h3>JAMB Admission Letter</h3>
@@ -83,7 +81,6 @@
       <p>Official JAMB admission letter for your records or institution submission.</p>
       <button class="apply-btn" onclick="openModal('admission','JAMB Admission Letter','₦2,500')"><i class="fab fa-whatsapp"></i> Submit</button>
     </div>
-
     <div class="sub-card">
       <div class="sub-icon"><i class="fas fa-poll"></i></div>
       <h3>JAMB Result</h3>
@@ -91,7 +88,6 @@
       <p>Retrieve your official JAMB UTME result slip quickly.</p>
       <button class="apply-btn" onclick="openModal('result','JAMB Result','₦3,000')"><i class="fab fa-whatsapp"></i> Submit</button>
     </div>
-
     <div class="sub-card">
       <div class="sub-icon"><i class="fas fa-receipt"></i></div>
       <h3>JAMB Registration Slip</h3>
@@ -99,15 +95,13 @@
       <p>Get a copy of your JAMB registration slip for any year.</p>
       <button class="apply-btn" onclick="openModal('regslip','JAMB Registration Slip','₦1,000')"><i class="fab fa-whatsapp"></i> Submit</button>
     </div>
-
     <div class="sub-card">
       <div class="sub-icon"><i class="fas fa-print"></i></div>
       <h3>JAMB Reprinting</h3>
       <div class="price-tag">₦1,500</div>
-      <p>Reprint UTME Registration Slip, DE Slip, Original Result, Change of Course Slip & more.</p>
+      <p>Reprint UTME Registration Slip, DE Slip, Original Result & more.</p>
       <button class="apply-btn" onclick="openModal('reprint','JAMB Reprinting','₦1,500')"><i class="fab fa-whatsapp"></i> Submit</button>
     </div>
-
     <div class="sub-card">
       <div class="sub-icon"><i class="fas fa-check-circle"></i></div>
       <h3>Check Admission Status</h3>
@@ -115,15 +109,13 @@
       <p>Verify your JAMB admission status instantly.</p>
       <button class="apply-btn" onclick="openModal('status','Check JAMB Admission Status','₦1,500')"><i class="fab fa-whatsapp"></i> Submit</button>
     </div>
-
     <div class="sub-card">
       <div class="sub-icon"><i class="fas fa-image"></i></div>
       <h3>O'level Result Screenshot</h3>
       <div class="price-tag">₦1,500</div>
-      <p>Get a screenshot of your JAMB O'level result as uploaded on the portal.</p>
-      <button class="apply-btn" onclick="openModal('olevel','JAMB O'level Result Screenshot','₦1,500')"><i class="fab fa-whatsapp"></i> Submit</button>
+      <p>Get a screenshot of your JAMB O'level result.</p>
+      <button class="apply-btn" onclick="openModal('olevel','JAMB O\'level Result Screenshot','₦1,500')"><i class="fab fa-whatsapp"></i> Submit</button>
     </div>
-
     <div class="sub-card">
       <div class="sub-icon"><i class="fas fa-key"></i></div>
       <h3>Profile Code Retrieval</h3>
@@ -131,7 +123,6 @@
       <p>Retrieve your JAMB profile code quickly for any use.</p>
       <button class="apply-btn" onclick="openModal('profile','JAMB Profile Code Retrieval','₦1,500')"><i class="fab fa-whatsapp"></i> Submit</button>
     </div>
-
     <div class="sub-card">
       <div class="sub-icon"><i class="fas fa-hashtag"></i></div>
       <h3>Reg Number Retrieval</h3>
@@ -139,19 +130,17 @@
       <p>Retrieve your JAMB registration number quickly.</p>
       <button class="apply-btn" onclick="openModal('regno','JAMB Registration Number Retrieval','₦1,500')"><i class="fab fa-whatsapp"></i> Submit</button>
     </div>
-
   </div>
 </div>
 
-<!-- UNIVERSAL JAMB MODAL -->
 <div class="modal-overlay" id="jamb-modal">
   <div class="modal">
     <h2 id="modal-title">JAMB Service</h2>
     <div class="price-info" id="modal-price"></div>
     <div class="form-group"><label>Full Name *</label><input type="text" id="jfullname" placeholder="Full legal name"></div>
     <div class="form-group"><label>Profile Code or JAMB Reg No. *</label><input type="text" id="jcode" placeholder="Profile code or Registration number"></div>
-    <div class="form-group"><label>JAMB Year *</label><input type="text" id="jyear" placeholder="e.g. 2017"></div>
-        <div class="modal-actions">
+    <div class="form-group"><label>JAMB Year *</label><input type="text" id="jyear" placeholder="e.g. 2024"></div>
+    <div class="modal-actions">
       <button class="btn-cancel" onclick="closeJambModal()">Cancel</button>
       <button class="btn-send" onclick="sendJamb()"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
     </div>
@@ -169,15 +158,22 @@ function openModal(type, name, price) {
   document.getElementById('modal-price').textContent = 'Cost: ' + price;
   document.getElementById('jamb-modal').classList.add('active');
 }
-function closeJambModal() { document.getElementById('jamb-modal').classList.remove('active'); }
+
+function closeJambModal() { 
+  document.getElementById('jamb-modal').classList.remove('active'); 
+}
 
 function sendJamb() {
   const name = document.getElementById('jfullname').value.trim();
   const code = document.getElementById('jcode').value.trim();
   const year = document.getElementById('jyear').value.trim();
-  const wa = document.getElementById('jwa').value.trim();
-  if (!name || !code || !year || !wa) { alert('Please fill all required fields.'); return; }
-  const msg = `*JAMB SERVICES*\n*Service: ${currentService}*\n\n▪️ Full Name: ${name}\n▪️ Profile Code / Reg No.: ${code}\n▪️ JAMB Year: ${year}\n▪️ WhatsApp Number: ${wa}\n\n_Cost: ${currentPrice}_\n_Delivery: 30 Minutes_`;
+
+  if (!name || !code || !year) { 
+    alert('Please fill all required fields.'); 
+    return; 
+  }
+
+  const msg = `*JAMB SERVICES*\n*Service: ${currentService}*\n\n▪️ Full Name: ${name}\n▪️ Profile Code / Reg No.: ${code}\n▪️ JAMB Year: ${year}\n\n_Cost: ${currentPrice}_\n_Delivery: 30 Minutes_`;
   window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
 }
 
@@ -188,8 +184,13 @@ document.getElementById('jamb-modal').addEventListener('click', e => {
 function toggleTheme() {
   const html = document.documentElement;
   const btn = document.getElementById('themeBtn');
-  if (html.getAttribute('data-theme')==='dark') { html.removeAttribute('data-theme'); btn.innerHTML='<i class="fas fa-moon"></i>'; }
-  else { html.setAttribute('data-theme','dark'); btn.innerHTML='<i class="fas fa-sun"></i>'; }
+  if (html.getAttribute('data-theme')==='dark') { 
+    html.removeAttribute('data-theme'); 
+    btn.innerHTML='<i class="fas fa-moon"></i>'; 
+  } else { 
+    html.setAttribute('data-theme','dark'); 
+    btn.innerHTML='<i class="fas fa-sun"></i>'; 
+  }
 }
 </script>
 </body>
