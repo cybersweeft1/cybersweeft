@@ -125,7 +125,6 @@
   </div>
 </div>
 
-<!-- MODAL: NIN Slip -->
 <div class="modal-overlay" id="modal-slip">
   <div class="modal">
     <h2>NIN Verification Slip</h2>
@@ -146,7 +145,6 @@
   </div>
 </div>
 
-<!-- MODAL: Phone Search -->
 <div class="modal-overlay" id="modal-phone">
   <div class="modal">
     <h2>NIN Search via Phone Number</h2>
@@ -167,7 +165,6 @@
   </div>
 </div>
 
-<!-- MODAL: Demo Search -->
 <div class="modal-overlay" id="modal-demo">
   <div class="modal">
     <h2>NIN Demo Search</h2>
@@ -205,15 +202,14 @@ function sendSlip() {
   const nin = document.getElementById('slip-nin').value.trim();
   const type = document.getElementById('slip-type').value;
   if (!nin ) { alert('Please fill all required fields.'); return; }
-  const msg = `*NIN SERVICES*\n*Service: NIN Verification Slip*\n\n▪️ Slip Type: ${type}\n▪️ NIN Number: ${nin}\n▪️ WhatsApp Number: ${wa}\n\n_Unit Cost: ₦1,500_`;
+  const msg = `*NIN SERVICES*\n*Service: NIN Verification Slip*\n\n▪️ Slip Type: ${type}\n▪️ NIN Number: ${nin}\n\n_Unit Cost: ₦1,500_`;
   sendWA(msg);
 }
 function sendPhone() {
   const num = document.getElementById('phone-num').value.trim();
   const type = document.getElementById('phone-type').value;
-  const wa = document.getElementById('phone-wa').value.trim();
-  if (!num || !wa) { alert('Please fill all required fields.'); return; }
-  const msg = `*NIN SERVICES*\n*Service: NIN Search Using Phone Number*\n\n▪️ Slip Type: ${type}\n▪️ Phone Number: ${num}\n▪️ WhatsApp Number: ${wa}\n\n_Unit Cost: ₦1,500_`;
+  if (!num) { alert('Please fill all required fields.'); return; }
+  const msg = `*NIN SERVICES*\n*Service: NIN Search Using Phone Number*\n\n▪️ Slip Type: ${type}\n▪️ Phone Number: ${num}\n\n_Unit Cost: ₦1,500_`;
   sendWA(msg);
 }
 function sendDemo() {
@@ -222,9 +218,8 @@ function sendDemo() {
   const gender = document.getElementById('demo-gender').value;
   const dob = document.getElementById('demo-dob').value;
   const type = document.getElementById('demo-type').value;
-  const wa = document.getElementById('demo-wa').value.trim();
-  if (!fn || !sn || !dob || !wa) { alert('Please fill all required fields.'); return; }
-  const msg = `*NIN SERVICES*\n*Service: NIN Demo Search*\n\n▪️ Slip Type: ${type}\n▪️ First Name: ${fn}\n▪️ Surname: ${sn}\n▪️ Gender: ${gender}\n▪️ Date of Birth: ${dob}\n▪️ WhatsApp Number: ${wa}\n\n_Unit Cost: ₦2,000_`;
+  if (!fn || !sn || !dob) { alert('Please fill all required fields.'); return; }
+  const msg = `*NIN SERVICES*\n*Service: NIN Demo Search*\n\n▪️ Slip Type: ${type}\n▪️ First Name: ${fn}\n▪️ Surname: ${sn}\n▪️ Gender: ${gender}\n▪️ Date of Birth: ${dob}\n\n_Unit Cost: ₦2,000_`;
   sendWA(msg);
 }
 function toggleTheme() {
