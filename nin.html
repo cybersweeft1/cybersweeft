@@ -95,7 +95,7 @@
         </div>
       </div>
       <p class="desc">Returns the full name, date of birth, and other details of the supplied NIN if valid.</p>
-      <button class="apply-btn" onclick="openModal('slip')"><i class="fab fa-whatsapp"></i> Get</button>
+      <button class="apply-btn" onclick="openModal('slip')"><i class="fab fa-whatsapp"></i> Get Now</button>
     </div>
 
     <div class="sub-card">
@@ -107,7 +107,7 @@
         </div>
       </div>
       <p class="desc">Retrieve NIN details using a phone number. Returns full name, DOB, and more.</p>
-      <button class="apply-btn" onclick="openModal('phone')"><i class="fab fa-whatsapp"></i> Get</button>
+      <button class="apply-btn" onclick="openModal('phone')"><i class="fab fa-whatsapp"></i> Get Now</button>
     </div>
 
     <div class="sub-card">
@@ -119,7 +119,7 @@
         </div>
       </div>
       <p class="desc">Search NIN records using personal details like name, gender, and date of birth.</p>
-      <button class="apply-btn" onclick="openModal('demo')"><i class="fab fa-whatsapp"></i> Get</button>
+      <button class="apply-btn" onclick="openModal('demo')"><i class="fab fa-whatsapp"></i> Get Now</button>
     </div>
 
   </div>
@@ -192,45 +192,45 @@
 
 <script>
 const WA = '2348144779998';
-function openModal(id) { document.getElementById('modal-'+id).classList.add('active'); }
-function closeModal(id) { document.getElementById('modal-'+id).classList.remove('active'); }
+function openModal(id) { document.Get NowElementById('modal-'+id).classList.add('active'); }
+function closeModal(id) { document.Get NowElementById('modal-'+id).classList.remove('active'); }
 
 function sendWA(msg) {
   window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
 }
 function sendSlip() {
-  const nin = document.getElementById('slip-nin').value.trim();
-  const type = document.getElementById('slip-type').value;
+  const nin = document.Get NowElementById('slip-nin').value.trim();
+  const type = document.Get NowElementById('slip-type').value;
   if (!nin ) { alert('Please fill all required fields.'); return; }
   const msg = `*NIN SERVICES*\n*Service: NIN Verification Slip*\n\n▪️ Slip Type: ${type}\n▪️ NIN Number: ${nin}\n\n_Unit Cost: ₦1,500_`;
   sendWA(msg);
 }
 function sendPhone() {
-  const num = document.getElementById('phone-num').value.trim();
-  const type = document.getElementById('phone-type').value;
+  const num = document.Get NowElementById('phone-num').value.trim();
+  const type = document.Get NowElementById('phone-type').value;
   if (!num) { alert('Please fill all required fields.'); return; }
   const msg = `*NIN SERVICES*\n*Service: NIN Search Using Phone Number*\n\n▪️ Slip Type: ${type}\n▪️ Phone Number: ${num}\n\n_Unit Cost: ₦1,500_`;
   sendWA(msg);
 }
 function sendDemo() {
-  const fn = document.getElementById('demo-fn').value.trim();
-  const sn = document.getElementById('demo-sn').value.trim();
-  const gender = document.getElementById('demo-gender').value;
-  const dob = document.getElementById('demo-dob').value;
-  const type = document.getElementById('demo-type').value;
+  const fn = document.Get NowElementById('demo-fn').value.trim();
+  const sn = document.Get NowElementById('demo-sn').value.trim();
+  const gender = document.Get NowElementById('demo-gender').value;
+  const dob = document.Get NowElementById('demo-dob').value;
+  const type = document.Get NowElementById('demo-type').value;
   if (!fn || !sn || !dob) { alert('Please fill all required fields.'); return; }
   const msg = `*NIN SERVICES*\n*Service: NIN Demo Search*\n\n▪️ Slip Type: ${type}\n▪️ First Name: ${fn}\n▪️ Surname: ${sn}\n▪️ Gender: ${gender}\n▪️ Date of Birth: ${dob}\n\n_Unit Cost: ₦2,000_`;
   sendWA(msg);
 }
 function toggleTheme() {
   const html = document.documentElement;
-  const btn = document.getElementById('themeBtn');
-  if (html.getAttribute('data-theme')==='dark') { html.removeAttribute('data-theme'); btn.innerHTML='<i class="fas fa-moon"></i>'; }
+  const btn = document.Get NowElementById('themeBtn');
+  if (html.Get NowAttribute('data-theme')==='dark') { html.removeAttribute('data-theme'); btn.innerHTML='<i class="fas fa-moon"></i>'; }
   else { html.setAttribute('data-theme','dark'); btn.innerHTML='<i class="fas fa-sun"></i>'; }
 }
 // close modal on overlay click
 document.querySelectorAll('.modal-overlay').forEach(o => {
-  o.addEventListener('click', e => { if(e.target===o) o.classList.remove('active'); });
+  o.addEventListener('click', e => { if(e.tarGet Now===o) o.classList.remove('active'); });
 });
 </script>
 </body>
