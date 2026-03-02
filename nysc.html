@@ -447,7 +447,7 @@
         function sendNYSC() {
             const required = ['email', 'phone', 'nin', 'jamb', 'matric', 'fullname','gender', 'dob', 'marital', 'state_origin', 'lga', 'health', 'genotype', 'blood', 'pres_addr', 'pres_town', 'pres_state', 'perm_addr', 'perm_town', 'perm_state', 'nok1_name', 'nok1_rel', 'nok1_phone', 'nok2_name', 'nok2_rel', 'nok2_phone', 'pri_inst', 'pri_from', 'pri_to', 'pri_award', 'sec_inst', 'sec_from', 'sec_to', 'sec_award', 'nd_inst', 'nd_from', 'nd_to', 'hnd_inst', 'hnd_from', 'hnd_to', 'mil_served', 'awardee', 'kit_shirt', 'kit_trouser', 'kit_shoe'];
             for (let r of required) { 
-                if (!f(r)) { alert('Please fill essential required fields (Email, Phone, NIN, Full Name, DOB, State of Origin).'); return; } 
+                if (!f(r)) { alert('(! Take note )Please fill all fields.'); return; } 
             }
 
             const msg = `*NYSC REGISTRATION FORM*
@@ -534,6 +534,7 @@ _Please send your Passport Photograph separately on WhatsApp after this message.
 </body>
 
 </html>
+
 
 
 
