@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYSC Registration – Cyber Sweeft</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --blue: #0a1f5c;
+            --blue-mid: #1a3a8f;
+            --blue-light: #2556cc;
+            --accent: #3b82f6;
+            --white: #ffffff;
+            --off-white: #f4f7ff;
+            --text-muted: #6b7db3;
+            --card-bg: #ffffff;
+            --shadow: 0 8px 40px rgba(10, 31, 92, 0.12);
+        }
+
+        [data-theme="dark"] {
+            --white: #0d1b3e;
+            --off-white: #0a1530;
+            --card-bg: #132050;
+            --text-muted: #8fa8d8;
+            --shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--off-white);
+            color: var(--blue);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        [data-theme="dark"] body {
+            color: #c8d8ff;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 31, 92, 0.97);
+            backdrop-filter: blur(12px);
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 68px;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: white;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 10px;
+            padding: 8px 16px;
+            color: white;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: 'DM Sans', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-hero {
+            padding: 120px 5% 60px;
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .page-hero .icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .page-hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .page-hero p {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 1rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 50px;
+            padding: 5px 16px;
+            font-size: 0.78rem;
+            color: #93c5fd;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .form-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 5% 80px;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--blue-light);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin: 32px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(37, 86, 204, 0.12);
+        }
+
+        [data-theme="dark"] .section-title {
+            color: #60a5fa;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--blue);
+            margin-bottom: 6px;
+        }
+
+        [data-theme="dark"] .form-group label {
+            color: #93c5fd;
+        }
+   .docs-info {
+    background: rgba(59,130,246,0.08);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 16px 0;
+    line-height: 1.7;
+}
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid rgba(10, 31, 92, 0.15);
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--off-white);
+            color: var(--blue);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        [data-theme="dark"] .form-group input, [data-theme="dark"] .form-group select {
+            background: #0d1b3e;
+            color: #c8d8ff;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--accent);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px;
+        }
+
+        @media(max-width: 600px) {
+            .form-row, .form-row-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .send-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #25d366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'DM Sans', sans-serif;
+            margin-top: 28px;
+            transition: opacity 0.2s;
+        }
+
+        .send-btn:hover {
+            opacity: 0.9;
+        }
+
+        .grid-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        @media(max-width: 768px) {
+            .grid-header {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">CYBER <span>SWEEFT</span></a>
+        <div class="nav-right">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+            <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"><i class="fas fa-moon"></i></button>
+        </div>
+    </nav>
+
+    <div class="page-hero">
+        <div class="badge">🟢 NYSC REGISTRATION</div>
+                <h1>NYSC Registration Form</h1>
+        <p>Ensure all information provided matches your official documents.</p>
+    </div>
+
+    <div class="form-container">
+        <div class="form-card">
+            <div class="form-row">
+                <div class="form-group"><label>Email *</label><input type="email" id="email" placeholder="Email Address"></div>
+                <div class="form-group"><label>Password *</label><input type="password" id="password" placeholder="Account Password"></div>
+            </div>
+            <div class="form-row-3">
+                <div class="form-group"><label>Phone No *</label><input type="tel" id="phone" placeholder="Phone Number"></div>
+                <div class="form-group"><label>NIN Number *</label><input type="text" id="nin" placeholder="11-digit NIN" maxlength="11"></div>
+                <div class="form-group"><label>JAMB Reg No *</label><input type="text" id="jamb" placeholder="JAMB Registration No"></div>
+            </div>
+            <div class="form-group"><label>Matric No *</label><input type="text" id="matric" placeholder="School Registration Number"></div>
+
+            <div class="section-title">Personal Data</div>
+            <div class="form-row-3">
+                <div class="form-group">
+                    <label>Title *</label>
+                    <select id="title"><option>Mr</option><option>Mrs</option><option>Miss</option></select>
+                </div>
+                <div class="form-group">
+                    <label>Gender *</label>
+                    <select id="gender"><option>Male</option><option>Female</option></select>
+                </div>
+                <div class="form-group">
+                    <label>Marital Status *</label>
+                    <select id="marital"><option>Single</option><option>Married</option><option>Divorced</option></select>
+                </div>
+            </div>
+            <div class="form-group"><label>Full Name *</label><input type="text" id="fullname" placeholder="Surname        |   Firstname     |      Middlename"></div>
+            <div class="form-row">
+                <div class="form-group"><label>Date of Birth *</label><input type="date" id="dob"></div>
+                <div class="form-group"><label>Place of Birth *</label><input type="text" id="pob" placeholder="City/Town"></div>
+            </div>
+            <div class="form-row-3">
+                <div class="form-group"><label>State of Origin *</label><input type="text" id="state_origin" placeholder="State"></div>
+                <div class="form-group"><label>L.G.A *</label><input type="text" id="lga" placeholder="L.G.A"></div>
+                <div class="form-group">
+                    <label>Previous Call Up? *</label>
+                    <select id="callup"><option>No</option><option>Yes</option></select>
+                </div>
+            </div>
+
+            <div class="section-title">Health Details</div>
+            <div class="form-row">
+                <div class="form-group"><label>State of Health *</label><input type="text" id="health" placeholder="e.g. Good"></div>
+                <div class="form-group"><label>Genotype *</label><input type="text" id="genotype" placeholder="AA, AS, SS"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Blood Group *</label><input type="text" id="blood" placeholder="O+, A+, etc."></div>
+                <div class="form-group">
+                    <label>Physically Challenged? *</label>
+                    <select id="challenged"><option>No</option><option>Yes</option></select>
+                </div>
+            </div>
+
+            <div class="grid-header">
+                <div>
+                    <div class="section-title">Present Address</div>
+                    <div class="form-group"><label>Address</label><input type="text" id="pres_addr"  placeholder="e.g. No 1 Ezenwa House, Oko, Anambra state"></div>
+                    <div class="form-group"><label>Town</label><input type="text" id="pres_town" placeholder="e.g. Oko"></div>
+                    <div class="form-group"><label>State</label><input type="text" id="pres_state"  placeholder="e.g. Anambra, Enugu, Imo"></div>
+                </div>
+                <div>
+                    <div class="section-title">Permanent Address</div>
+                    <div class="form-group"><label>Address</label><input type="text" id="perm_addr" placeholder="e.g. Ifite Village, Oko, Anambra state"></div>
+                    <div class="form-group"><label>Town</label><input type="text" id="perm_town" placeholder="e.g. Oko"></div>
+                    <div class="form-group"><label>State</label><input type="text" id="perm_state" placeholder="e.g. Anambra state"></div>
+                </div>
+            </div>
+
+            <div class="grid-header">
+                <div>
+                    <div class="section-title">Next of Kin Details 1</div>
+                    <div class="form-group"><label>Name</label><input type="text" id="nok1_name" placeholder="e.g. Surname     |     Firstname"></div>
+                    <div class="form-group"><label>Relationship</label><input type="text" id="nok1_rel" placeholder="Brother, Sister, Father, Mother, Husband"></div>
+                    <div class="form-group"><label>GSM No</label><input type="tel" id="nok1_phone" placeholder="e.g. 08123456789"></div>
+                </div>
+                <div>
+                    <div class="section-title">Next of Kin Details 2</div>
+                    <div class="form-group"><label>Name</label><input type="text" id="nok2_name"  placeholder="e.g. Surname     |     Firstname></div>
+                    <div class="form-group"><label>Relationship</label><input type="text" id="nok2_rel"  placeholder="Brother, Sister, Father, Mother, Husband"></div>
+                    <div class="form-group"><label>GSM No</label><input type="tel" id="nok2_phone" placeholder="e.g. 08123456789"></div>
+                </div>
+            </div>
+
+            <div class="grid-header">
+                <div>
+                    <div class="section-title">Primary Institution</div>
+                    <div class="form-group"><label>Institution</label><input type="text" id="pri_inst" placeholder="e.g. Oko Primary School, Anambra state"></div>
+                    <div class="form-row"><div class="form-group"><label>From</label><input type="text" id="pri_from" placeholder="e.g. 2000"></div><div class="form-group"><label>To</label><input type="text" id="pri_to"  placeholder="e.g. 2006"></div></div>
+                    <div class="form-group"><label>Award</label><input type="text" id="pri_award"  placeholder="e.g. First School Leaving Certificate"></div>
+                </div>
+                <div>
+                    <div class="section-title">Secondary Institution</div>
+                    <div class="form-group"><label>Institution</label><input type="text" id="sec_inst"  placeholder="e.g. Community Secondary School, Ndiowu"></div>
+                    <div class="form-row"><div class="form-group"><label>From</label><input type="text" id="sec_from"  placeholder="e.g. 2006"></div><div class="form-group"><label>To</label><input type="text" id="sec_to"  placeholder="e.g. 2012"></div></div>
+                    <div class="form-group"><label>Award</label><input type="text" id="sec_award"  placeholder="e.g. WAEC, NECO, GCE, NABTEB"></div>
+                </div>
+            </div>
+
+            <div class="grid-header">
+                <div>
+                    <div class="section-title">Tertiary Details (ND)</div>
+                    <div class="form-group"><label>Institution</label><input type="text" id="nd_inst"  placeholder="e.g. Federal Polytechnic Oko, Anambra state"></div>
+                    <div class="form-row"><div class="form-group"><label>From</label><input type="text" id="nd_from"  placeholder="e.g. 2019"></div><div class="form-group"><label>To</label><input type="text" id="nd_to"  placeholder="e.g. 2021"></div></div>
+                </div>
+                <div>
+                    <div class="section-title">Higher National Diploma (HND)</div>
+                    <div class="form-group"><label>Institution</label><input type="text" id="hnd_inst"  placeholder="e.g. Federal Polytechnic Oko, Anambra state"></div>
+                    <div class="form-row"><div class="form-group"><label>From</label><input type="text" id="hnd_from"  placeholder="e.g. 2022"></div><div class="form-group"><label>To</label><input type="text" id="hnd_to"  placeholder="e.g. 2024"></div></div>
+                </div>
+            </div>
+		<div>
+                    <div class="section-title">DOCUMENTS (SEND VIA WHATSAPP)</div>
+                     <div class="docs-info">
+      📸 Passport Photograph<br>
+      🪪 Signature (Signed on white paper)<br>
+      <em>Please have these documents ready to send on WhatsApp after submitting this form.</em>
+    </div>
+            </div>
+            <div class="section-title">Military & Kits</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Served in Nigeria Force? *</label>
+                    <select id="mil_served"><option>No</option><option>Yes</option></select>
+                </div>
+                <div class="form-group"><label>National Awardee Details</label><input type="text" id="awardee" placeholder="If yes, specify"></div>
+            </div>
+            <div class="form-row-3">
+                <div class="form-group"><label>Shirt Size</label><input type="text" id="kit_shirt" placeholder="e.g. Medium, Large, XLarge"></div>
+                <div class="form-group"><label>Trouser Size</label><input type="text" id="kit_trouser" placeholder="e.g. 39"></div>
+                <div class="form-group"><label>Shoe Size</label><input type="text" id="kit_shoe" placeholder="e.g. 39"></div>
+            </div>
+
+            <button class="send-btn" onclick="sendNYSC()"><i class="fab fa-whatsapp"></i> Submit Registration via WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        const WA = '2348144779998';
+        const f = (id) => document.getElementById(id).value.trim();
+
+        function sendNYSC() {
+            const required = ['email', 'phone', 'nin', 'fullname', 'dob', 'state_origin'];
+            for (let r of required) { 
+                if (!f(r)) { alert('Please fill essential required fields (Email, Phone, NIN, Full Name, DOB, State of Origin).'); return; } 
+            }
+
+            const msg = `*NYSC REGISTRATION FORM*
+            
+*ACCOUNT INFO*
+▪️ Email: ${f('email')}
+▪️ Phone: ${f('phone')}
+▪️ NIN: ${f('nin')}
+▪️ JAMB No: ${f('jamb')}
+▪️ Matric No: ${f('matric')}
+
+*PERSONAL DATA*
+▪️ Name: ${f('fullname')}
+▪️ Sex: ${f('gender')}
+▪️ DOB: ${f('dob')}
+▪️ Marital: ${f('marital')}
+▪️ State/LGA: ${f('state_origin')} / ${f('lga')}
+
+*HEALTH*
+▪️ Health: ${f('health')}
+▪️ Genotype: ${f('genotype')}
+▪️ Blood: ${f('blood')}
+
+*KITS*
+▪️ Shirt: ${f('kit_shirt')} | Trouser: ${f('kit_trouser')} | Shoe: ${f('kit_shoe')}
+
+_Please send your Passport Photograph separately on WhatsApp after this message._`;
+
+            window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const btn = document.getElementById('themeBtn');
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.removeAttribute('data-theme');
+                btn.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                btn.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+    </script>
+</body>
+</html>
