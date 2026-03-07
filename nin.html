@@ -210,10 +210,9 @@
       <div class="form-group"><label>National ID Number (NIN) *</label><input type="text" id="val-nin" placeholder="11-digit NIN" maxlength="11"></div>
       <div class="form-group"><label>Reason for Validation *</label>
         <select id="val-reason">
-          <option value="Personal Record Check">Personal Record Check</option>
-          <option value="Employment Verification">Employment Verification</option>
-          <option value="Official/Legal Requirement">Official/Legal Requirement</option>
-          <option value="KYC Compliance">KYC Compliance</option>
+          <option value="No Record Found">No Record Found</option>
+          <option value="Sim Reg Error">Sim Reg Error</option>
+          <option value="Photograph Error">Photograph Error</option>
         </select>
       </div>
       <div class="modal-actions">
@@ -256,7 +255,6 @@ function sendDemo() {
   sendWA(msg);
 }
 
-// NEW FUNCTION: NIN VALIDATION
 function sendValidation() {
   const name = document.getElementById('val-name').value.trim();
   const nin = document.getElementById('val-nin').value.trim();
@@ -272,7 +270,7 @@ function toggleTheme() {
   if (html.getAttribute('data-theme')==='dark') { html.removeAttribute('data-theme'); btn.innerHTML='<i class="fas fa-moon"></i>'; }
   else { html.setAttribute('data-theme','dark'); btn.innerHTML='<i class="fas fa-sun"></i>'; }
 }
-// close modal on overlay click
+
 document.querySelectorAll('.modal-overlay').forEach(o => {
   o.addEventListener('click', e => { if(e.target===o) o.classList.remove('active'); });
 });
