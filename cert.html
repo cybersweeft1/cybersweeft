@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cert | Transcript – Cyber Sweeft</title>
+<title>Clearance Deals – Cyber Sweeft</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
@@ -129,6 +129,16 @@
     line-height: 1.6;
     flex: 1;
   }
+  
+  /* Card Footer with Button and Price */
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 10px;
+  }
+  
   .service-btn {
     display: inline-flex; align-items: center; gap: 8px;
     background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
@@ -140,9 +150,18 @@
     transition: opacity 0.2s, transform 0.2s;
     font-family: 'DM Sans', sans-serif;
     width: fit-content;
-    margin-top: auto;
   }
   .service-btn:hover { opacity: 0.9; transform: scale(1.02); }
+  
+  .price-tag {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--accent);
+    background: rgba(59, 130, 246, 0.1);
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
 
   /* MODAL STYLING */
   .modal-overlay { display:none;position:fixed;inset:0;background:rgba(6,15,46,0.7);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;padding:20px; }
@@ -176,6 +195,8 @@
   /* Responsive */
   @media(max-width: 600px) {
     .services-grid { grid-template-columns: 1fr; }
+    .card-footer { flex-direction: column; gap: 10px; align-items: flex-start; }
+    .price-tag { align-self: flex-end; }
   }
 </style>
 </head>
@@ -207,7 +228,10 @@
       <div class="service-icon"><i class="fas fa-id-card"></i></div>
       <h3>ND Certificate</h3>
       <p>Processing and collection of National Diploma Certificate. Duration: 1 Month.</p>
-      <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦8,000</div>
+      </div>
     </div>
 
     <!-- 2. HND Certificate -->
@@ -215,7 +239,10 @@
       <div class="service-icon"><i class="fas fa-id-card"></i></div>
       <h3>HND Certificate</h3>
       <p>Processing and collection of Higher National Diploma Certificate. Duration: 1 Month.</p>
-      <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦28,000</div>
+      </div>
     </div>
 
     <!-- 3. Academic Transcript -->
@@ -223,7 +250,10 @@
       <div class="service-icon"><i class="fas fa-file-invoice"></i></div>
       <h3>Academic Transcript</h3>
       <p>Official transcript processing for ND/HND. Duration: 1 Week.</p>
-      <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦8,000</div>
+      </div>
     </div>
 
     <!-- 4. Final Clearance -->
@@ -231,7 +261,10 @@
       <div class="service-icon"><i class="fas fa-clipboard-check"></i></div>
       <h3>Final Clearance</h3>
       <p>Complete final year clearance processing. Duration: 1 Week.</p>
-      <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦15,000</div>
+      </div>
     </div>
 
     <!-- 5. New Intake Clearance -->
@@ -239,7 +272,10 @@
       <div class="service-icon"><i class="fas fa-user-plus"></i></div>
       <h3>New Intake Clearance</h3>
       <p>Fresh student registration and clearance processing.</p>
-      <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦5,000</div>
+      </div>
     </div>
 
     <!-- 6. School Result -->
@@ -247,7 +283,10 @@
       <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
       <h3>School Result</h3>
       <p>Result checking and processing services.</p>
-      <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦2,000</div>
+      </div>
     </div>
 
     <!-- 7. Mobilization -->
@@ -255,7 +294,10 @@
       <div class="service-icon"><i class="fas fa-flag"></i></div>
       <h3>Mobilization</h3>
       <p>NYSC mobilization document preparation.</p>
-      <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦10,000</div>
+      </div>
     </div>
 
     <!-- 8. Reference Letter -->
@@ -263,7 +305,10 @@
       <div class="service-icon"><i class="fas fa-envelope-open-text"></i></div>
       <h3>Reference Letter</h3>
       <p>Official reference letter processing.</p>
-      <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦3,000</div>
+      </div>
     </div>
 
     <!-- 9. English Proficiency -->
@@ -271,7 +316,10 @@
       <div class="service-icon"><i class="fas fa-language"></i></div>
       <h3>English Proficiency</h3>
       <p>English proficiency certificate processing.</p>
-      <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦5,000</div>
+      </div>
     </div>
 
   </div>
@@ -326,6 +374,16 @@
   <div class="modal">
     <h2>Academic Transcript Application</h2>
     <p class="subtitle">Duration: 1 Week | Cost: ₦8,000</p>
+    
+    <!-- LEVEL SELECTOR ADDED HERE -->
+    <div class="form-group">
+      <label>Select Level *</label>
+      <select id="trans-level">
+        <option value="ND">ND (National Diploma)</option>
+        <option value="HND">HND (Higher National Diploma)</option>
+      </select>
+    </div>
+    
     <div class="form-group"><label>Registration Number *</label><input type="text" id="trans-reg" placeholder="Registration number"></div>
     <div class="form-group"><label>Full Name *</label><input type="text" id="trans-name" placeholder="Full name"></div>
     <div class="form-group"><label>Department *</label><input type="text" id="trans-dept" placeholder="Department"></div>
@@ -351,7 +409,7 @@
 <div class="modal-overlay" id="modal-clearance">
   <div class="modal">
     <h2>Final Clearance Application</h2>
-    <p class="subtitle">Duration: 1 Week</p>
+    <p class="subtitle">Duration: 1 Week | Cost: ₦15,000</p>
     <div class="form-group"><label>Full Name *</label><input type="text" id="clear-name" placeholder="Full name"></div>
     <div class="form-group"><label>Registration Number *</label><input type="text" id="clear-reg" placeholder="Registration number"></div>
     <div class="form-group"><label>Department *</label><input type="text" id="clear-dept" placeholder="Department"></div>
@@ -370,7 +428,7 @@
 <div class="modal-overlay" id="modal-intake">
   <div class="modal">
     <h2>New Intake Clearance</h2>
-    <p class="subtitle">Fresh Student Registration</p>
+    <p class="subtitle">Fresh Student Registration | Cost: ₦5,000</p>
     <div class="form-group"><label>Full Name *</label><input type="text" id="intake-name" placeholder="Full name"></div>
     <div class="form-group"><label>Registration Number/Entry Number *</label><input type="text" id="intake-reg" placeholder="Reg/Entry number"></div>
     <div class="form-group"><label>Email Address *</label><input type="email" id="intake-email" placeholder="Email"></div>
@@ -397,7 +455,7 @@
 <div class="modal-overlay" id="modal-result">
   <div class="modal">
     <h2>School Result Application</h2>
-    <p class="subtitle">Result Checking & Processing</p>
+    <p class="subtitle">Result Checking & Processing | Cost: ₦2,000</p>
     <div class="form-group"><label>Full Name *</label><input type="text" id="result-name" placeholder="Full name"></div>
     <div class="form-group"><label>Registration Number *</label><input type="text" id="result-reg" placeholder="Registration number"></div>
     <div class="form-group"><label>Email Address *</label><input type="email" id="result-email" placeholder="Email"></div>
@@ -413,7 +471,7 @@
 <div class="modal-overlay" id="modal-mobilization">
   <div class="modal">
     <h2>Mobilization Application</h2>
-    <p class="subtitle">NYSC Document Preparation</p>
+    <p class="subtitle">NYSC Document Preparation | Cost: ₦10,000</p>
     <div class="form-group"><label>Full Name *</label><input type="text" id="mob-name" placeholder="Full name"></div>
     <div class="form-group"><label>JAMB Admission Letter *</label><input type="text" id="mob-jamb" placeholder="Do you have this? (Yes/No/Link)"></div>
     <div class="form-group"><label>NIN *</label><input type="text" id="mob-nin" placeholder="National ID Number"></div>
@@ -430,7 +488,7 @@
 <div class="modal-overlay" id="modal-reference">
   <div class="modal">
     <h2>Reference Letter Application</h2>
-    <p class="subtitle">Official Reference Letter Processing</p>
+    <p class="subtitle">Official Reference Letter Processing | Cost: ₦3,000</p>
     <div class="form-group"><label>Full Name *</label><input type="text" id="ref-name" placeholder="Full name"></div>
     <div class="form-group"><label>Registration Number *</label><input type="text" id="ref-reg" placeholder="Registration number"></div>
     <div class="form-group"><label>Statement of Result *</label><input type="text" id="ref-result" placeholder="Do you have this? (Yes/No/Link)"></div>
@@ -446,7 +504,7 @@
 <div class="modal-overlay" id="modal-english">
   <div class="modal">
     <h2>English Proficiency Application</h2>
-    <p class="subtitle">English Proficiency Certificate</p>
+    <p class="subtitle">English Proficiency Certificate | Cost: ₦5,000</p>
     <div class="form-group"><label>Full Name *</label><input type="text" id="eng-name" placeholder="Full name"></div>
     <div class="form-group"><label>Registration Number *</label><input type="text" id="eng-reg" placeholder="Registration number"></div>
     <div class="form-group"><label>Statement of Result *</label><input type="text" id="eng-result" placeholder="Do you have this? (Yes/No/Link)"></div>
@@ -470,10 +528,11 @@ function closeModal(id) {
 }
 
 function sendWA(msg) {
+  // Fixed URL spacing issue
   window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
 }
 
-// Generic Form Sender for ND/HND
+// Generic Form Sender for ND/HND Certificates
 function sendForm(prefix, serviceName) {
   const fields = ['reg', 'name', 'dept', 'dob', 'state', 'email', 'phone', 'entry', 'grad'];
   let data = {};
@@ -487,7 +546,7 @@ function sendForm(prefix, serviceName) {
   
   if(empty) { alert('Please fill all required fields.'); return; }
   
-  const msg = `*CERTIFICATE DEALS - ${serviceName}*\n\n` +
+  const msg = `*CLEARANCE DEALS - ${serviceName}*\n\n` +
     `▪️ Reg No: ${data.reg}\n▪️ Name: ${data.name}\n▪️ Dept: ${data.dept}\n` +
     `▪️ DOB: ${data.dob}\n▪️ State: ${data.state}\n▪️ Email: ${data.email}\n` +
     `▪️ Phone: ${data.phone}\n▪️ Entry: ${data.entry}\n▪️ Graduation: ${data.grad}\n\n` +
@@ -495,8 +554,11 @@ function sendForm(prefix, serviceName) {
   sendWA(msg);
 }
 
-// Specific Senders for complex forms
+// Specific Sender for Transcript with Level Selection
 function sendTranscript() {
+  // Get Level Selection
+  const level = document.getElementById('trans-level').value; // "ND" or "HND"
+  
   const ids = ['trans-reg', 'trans-name', 'trans-dept', 'trans-dob', 'trans-state', 'trans-email', 
                'trans-phone', 'trans-entry', 'trans-grad', 'trans-org-email', 'trans-org-addr', 
                'trans-org-state', 'trans-org-postal'];
@@ -509,7 +571,8 @@ function sendTranscript() {
   });
   if(empty) { alert('Please fill all required fields.'); return; }
   
-  const msg = `*CERTIFICATE DEALS - Academic Transcript*\n\n*Student Info:*\n` +
+  // Dynamic Header based on selection: "ND TRANSCRIPT" or "HND TRANSCRIPT"
+  const msg = `*CLEARANCE DEALS - ${level} TRANSCRIPT*\n\n*Student Info:*\n` +
     `▪️ Reg: ${data['trans-reg']}\n▪️ Name: ${data['trans-name']}\n▪️ Dept: ${data['trans-dept']}\n` +
     `▪️ DOB: ${data['trans-dob']}\n▪️ State: ${data['trans-state']}\n▪️ Email: ${data['trans-email']}\n` +
     `▪️ Phone: ${data['trans-phone']}\n▪️ Entry: ${data['trans-entry']}\n▪️ Grad: ${data['trans-grad']}\n\n` +
@@ -521,17 +584,18 @@ function sendTranscript() {
 
 function sendClearance() {
   const name = document.getElementById('clear-name').value.trim();
-  const reg = document.getId('clear-reg').value.trim();
+  // Fixed typo: getId -> getElementById
+  const reg = document.getElementById('clear-reg').value.trim();
   const dept = document.getElementById('clear-dept').value.trim();
   const phone = document.getElementById('clear-phone').value.trim();
   const reqs = document.getElementById('clear-reqs').value.trim();
   
   if(!name || !reg || !dept || !phone) { alert('Please fill required fields.'); return; }
   
-  const msg = `*CERTIFICATE DEALS - Final Clearance*\n\n` +
+  const msg = `*CLEARANCE DEALS - Final Clearance*\n\n` +
     `▪️ Name: ${name}\n▪️ Reg No: ${reg}\n▪️ Dept: ${dept}\n▪️ Phone: ${phone}\n\n` +
     `*Available Documents:*\n${reqs || 'None specified'}\n\n` +
-    `_Duration: 1 Week_`;
+    `_Duration: 1 Week | Cost: ₦15,000_`;
   sendWA(msg);
 }
 
@@ -552,12 +616,12 @@ function sendIntake() {
   
   if(empty || !kinName || !kinPhone) { alert('Please fill all required fields.'); return; }
   
-  const msg = `*CERTIFICATE DEALS - New Intake Clearance*\n\n*Personal Info:*\n` +
+  const msg = `*CLEARANCE DEALS - New Intake Clearance*\n\n*Personal Info:*\n` +
     `▪️ Name: ${data.name}\n▪️ Reg: ${data.reg}\n▪️ Email: ${data.email}\n▪️ Phone: ${data.phone}\n` +
     `▪️ State: ${data.state}\n▪️ LGA: ${data.lga}\n▪️ Address: ${data.addr}\n` +
     `▪️ Blood Group: ${data.blood}\n▪️ NIN: ${data.nin}\n\n` +
     `*Next of Kin:*\n▪️ Name: ${kinName}\n▪️ Phone: ${kinPhone}\n▪️ Relationship: ${kinRel}\n\n` +
-    `*Passport:* ${passport}`;
+    `*Passport:* ${passport}\n\n_Cost: ₦5,000_`;
   sendWA(msg);
 }
 
@@ -569,8 +633,8 @@ function sendResult() {
   
   if(!name || !reg || !email || !phone) { alert('Please fill all fields.'); return; }
   
-  const msg = `*CERTIFICATE DEALS - School Result*\n\n` +
-    `▪️ Name: ${name}\n▪️ Reg No: ${reg}\n▪️ Email: ${email}\n▪️ Phone: ${phone}`;
+  const msg = `*CLEARANCE DEALS - School Result*\n\n` +
+    `▪️ Name: ${name}\n▪️ Reg No: ${reg}\n▪️ Email: ${email}\n▪️ Phone: ${phone}\n\n_Cost: ₦2,000_`;
   sendWA(msg);
 }
 
@@ -583,8 +647,8 @@ function sendMobilization() {
   
   if(!name || !jamb || !nin || !id || !result) { alert('Please fill all fields.'); return; }
   
-  const msg = `*CERTIFICATE DEALS - Mobilization*\n\n` +
-    `▪️ Name: ${name}\n▪️ JAMB Letter: ${jamb}\n▪️ NIN: ${nin}\n▪️ School ID: ${id}\n▪️ Statement of Result: ${result}`;
+  const msg = `*CLEARANCE DEALS - Mobilization*\n\n` +
+    `▪️ Name: ${name}\n▪️ JAMB Letter: ${jamb}\n▪️ NIN: ${nin}\n▪️ School ID: ${id}\n▪️ Statement of Result: ${result}\n\n_Cost: ₦10,000_`;
   sendWA(msg);
 }
 
@@ -596,8 +660,8 @@ function sendReference() {
   
   if(!name || !reg || !result) { alert('Please fill required fields.'); return; }
   
-  const msg = `*CERTIFICATE DEALS - Reference Letter*\n\n` +
-    `▪️ Name: ${name}\n▪️ Reg No: ${reg}\n▪️ Statement of Result: ${result}\n▪️ Purpose: ${purpose || 'Not specified'}`;
+  const msg = `*CLEARANCE DEALS - Reference Letter*\n\n` +
+    `▪️ Name: ${name}\n▪️ Reg No: ${reg}\n▪️ Statement of Result: ${result}\n▪️ Purpose: ${purpose || 'Not specified'}\n\n_Cost: ₦3,000_`;
   sendWA(msg);
 }
 
@@ -609,8 +673,8 @@ function sendEnglish() {
   
   if(!name || !reg || !result) { alert('Please fill required fields.'); return; }
   
-  const msg = `*CERTIFICATE DEALS - English Proficiency*\n\n` +
-    `▪️ Name: ${name}\n▪️ Reg No: ${reg}\n▪️ Statement of Result: ${result}\n▪️ Purpose: ${purpose || 'Not specified'}`;
+  const msg = `*CLEARANCE DEALS - English Proficiency*\n\n` +
+    `▪️ Name: ${name}\n▪️ Reg No: ${reg}\n▪️ Statement of Result: ${result}\n▪️ Purpose: ${purpose || 'Not specified'}\n\n_Cost: ₦5,000_`;
   sendWA(msg);
 }
 
