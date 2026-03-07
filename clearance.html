@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clearance Deals – Cyber Sweeft</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --blue: #0a1f5c; --blue-mid: #1a3a8f; --blue-light: #2556cc;
+    --accent: #3b82f6; --white: #ffffff; --off-white: #f4f7ff;
+    --text-muted: #6b7db3; --card-bg: #ffffff; --shadow: 0 8px 40px rgba(10,31,92,0.12);
+  }
+  [data-theme="dark"] { --white: #0d1b3e; --off-white: #0a1530; --card-bg: #132050; --text-muted: #8fa8d8; --shadow: 0 8px 40px rgba(0,0,0,0.4); }
+  * { margin:0;padding:0;box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:var(--off-white); color:var(--blue); transition:background 0.3s,color 0.3s; overflow-x: hidden; }
+  [data-theme="dark"] body { color:#c8d8ff; }
+  
+  /* NAV - Matching Reference */
+  nav { position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,31,92,0.97);backdrop-filter:blur(12px);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px; box-shadow: 0 2px 20px rgba(10,31,92,0.3); }
+  .logo { font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:white;letter-spacing:1px;text-decoration:none; }
+  .logo span { color:var(--accent); }
+  .nav-right { display:flex;align-items:center;gap:16px; }
+  .back-btn { background:rgba(255,255,255,0.1);border:none;border-radius:10px;padding:8px 16px;color:white;cursor:pointer;font-size:0.85rem;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;text-decoration:none;transition:background 0.2s; }
+  .back-btn:hover { background:rgba(255,255,255,0.2); }
+  .theme-toggle { background:rgba(255,255,255,0.1);border:none;border-radius:50%;width:38px;height:38px;color:white;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center; transition: background 0.2s; }
+  .theme-toggle:hover { background:rgba(255,255,255,0.2); }
+
+  /* HERO - Matching Reference Style */
+  .page-hero { 
+    min-height: 50vh;
+    padding: 120px 5% 60px; 
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 60%, var(--blue-light) 100%); 
+    text-align:center; 
+    color:white; 
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(59,130,246,0.2) 0%, transparent 60%);
+  }
+  .page-hero .icon { font-size:3rem; margin-bottom:16px; z-index: 1; }
+  .page-hero h1 { font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:800;margin-bottom:12px; z-index: 1; }
+  .page-hero p { color:rgba(255,255,255,0.75);font-size:1rem;max-width:500px;margin:0 auto; z-index: 1; }
+
+  /* SERVICES SECTION - Matching Reference Grid */
+  .services-section {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .section-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+  [data-theme="dark"] .section-header h2 { color: #93c5fd; }
+  .section-header p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* GRID LAYOUT FROM REFERENCE */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  /* CARD STYLING FROM REFERENCE */
+  .service-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 36px 28px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(10,31,92,0.07);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: flex; 
+    flex-direction: column; 
+    gap: 16px;
+    position: relative; 
+    overflow: hidden;
+    animation: fadeUp 0.6s ease both;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--blue-light), var(--accent));
+    border-radius: 20px 20px 0 0;
+  }
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(10,31,92,0.18);
+  }
+  .service-icon {
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; color: white;
+  }
+  .service-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--blue);
+  }
+  [data-theme="dark"] .service-card h3 { color: #93c5fd; }
+  .service-card p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    flex: 1;
+  }
+  
+  /* Card Footer with Button and Price */
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 10px;
+  }
+  
+  .service-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
+    color: white;
+    border: none; border-radius: 12px;
+    padding: 12px 22px;
+    font-size: 0.88rem; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    width: fit-content;
+  }
+  .service-btn:hover { opacity: 0.9; transform: scale(1.02); }
+  
+  .price-tag {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--accent);
+    background: rgba(59, 130, 246, 0.1);
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+
+  /* MODAL STYLING */
+  .modal-overlay { display:none;position:fixed;inset:0;background:rgba(6,15,46,0.7);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;padding:20px; }
+  .modal-overlay.active { display:flex; }
+  .modal { background:var(--card-bg);border-radius:24px;padding:30px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;animation:slideUp 0.3s ease; position: relative; }
+  .modal h2 { font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--blue);margin-bottom:6px; }
+  [data-theme="dark"] .modal h2 { color:#93c5fd; }
+  .modal .subtitle { font-size:0.85rem;color:var(--text-muted);margin-bottom:24px; }
+  .form-group { margin-bottom:16px; }
+  .form-group label { display:block;font-size:0.82rem;font-weight:600;color:var(--blue);margin-bottom:6px; }
+  [data-theme="dark"] .form-group label { color:#93c5fd; }
+  .form-group input, .form-group select, .form-group textarea {
+    width:100%;padding:12px 14px;border:1.5px solid rgba(10,31,92,0.15);border-radius:12px;
+    font-size:0.9rem;font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--blue);
+    outline:none;transition:border-color 0.2s;
+  }
+  [data-theme="dark"] .form-group input, [data-theme="dark"] .form-group select, [data-theme="dark"] .form-group textarea { background:#0d1b3e;color:#c8d8ff;border-color:rgba(255,255,255,0.1); }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--accent); }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .modal-actions { display:flex;gap:12px;margin-top:24px; }
+  .btn-send { flex:1;background:linear-gradient(135deg,#25d366,#128C7E);color:white;border:none;border-radius:12px;padding:14px;font-size:0.95rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:'DM Sans',sans-serif; }
+  .btn-cancel { background:var(--off-white);color:var(--text-muted);border:none;border-radius:12px;padding:14px 20px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.9rem; }
+  [data-theme="dark"] .btn-cancel { background:#1e3060; }
+
+  @keyframes slideUp { from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Responsive */
+  @media(max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .card-footer { flex-direction: column; gap: 10px; align-items: flex-start; }
+    .price-tag { align-self: flex-end; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">CYBER <span>SWEEFT</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"><i class="fas fa-moon"></i></button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="icon">🪪</div>
+  <h1>Clearance Deals</h1>
+  <p>Smart, Fast and Reliable Way For Student Clearance Without the Stress.</p>
+</div>
+
+<div class="services-section">
+  <div class="section-header">
+    <h2>FPO CLEARANCE DEALS</h2>
+    <p>Select a service below to get started instantly</p>
+  </div>
+  
+  <div class="services-grid">
+
+    <!-- 1. ND Certificate -->
+    <div class="service-card" style="animation-delay:0.05s" onclick="openModal('nd')">
+      <div class="service-icon"><i class="fas fa-id-card"></i></div>
+      <h3>ND Certificate</h3>
+      <p>Processing and collection of National Diploma Certificate. Duration: 1 Month.</p>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦8,000</div>
+      </div>
+    </div>
+
+    <!-- 2. HND Certificate -->
+    <div class="service-card" style="animation-delay:0.1s" onclick="openModal('hnd')">
+      <div class="service-icon"><i class="fas fa-id-card"></i></div>
+      <h3>HND Certificate</h3>
+      <p>Processing and collection of Higher National Diploma Certificate. Duration: 1 Month.</p>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦28,000</div>
+      </div>
+    </div>
+
+    <!-- 3. Academic Transcript -->
+    <div class="service-card" style="animation-delay:0.15s" onclick="openModal('transcript')">
+      <div class="service-icon"><i class="fas fa-file-invoice"></i></div>
+      <h3>Academic Transcript</h3>
+      <p>Official transcript processing for ND/HND. Duration: 1 Week.</p>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦8,000</div>
+      </div>
+    </div>
+
+    <!-- 4. Final Clearance -->
+    <div class="service-card" style="animation-delay:0.2s" onclick="openModal('clearance')">
+      <div class="service-icon"><i class="fas fa-clipboard-check"></i></div>
+      <h3>Final Clearance</h3>
+      <p>Complete final year clearance processing. Duration: 1 Week.</p>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦15,000</div>
+      </div>
+    </div>
+
+    <!-- 5. New Intake Clearance -->
+    <div class="service-card" style="animation-delay:0.25s" onclick="openModal('intake')">
+      <div class="service-icon"><i class="fas fa-user-plus"></i></div>
+      <h3>New Intake Clearance</h3>
+      <p>Fresh student registration and clearance processing.</p>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦5,000</div>
+      </div>
+    </div>
+
+    <!-- 6. School Result -->
+    <div class="service-card" style="animation-delay:0.3s" onclick="openModal('result')">
+      <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+      <h3>School Result</h3>
+      <p>Result checking and processing services.</p>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦15,000</div>
+      </div>
+    </div>
+
+    <!-- 7. Mobilization -->
+    <div class="service-card" style="animation-delay:0.35s" onclick="openModal('mobilization')">
+      <div class="service-icon"><i class="fas fa-flag"></i></div>
+      <h3>Mobilization</h3>
+      <p>NYSC mobilization document preparation.</p>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦5,000</div>
+      </div>
+    </div>
+
+    <!-- 8. Reference Letter -->
+    <div class="service-card" style="animation-delay:0.4s" onclick="openModal('reference')">
+      <div class="service-icon"><i class="fas fa-envelope-open-text"></i></div>
+      <h3>Reference Letter</h3>
+      <p>Official reference letter processing.</p>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦15,000</div>
+      </div>
+    </div>
+
+    <!-- 9. English Proficiency -->
+    <div class="service-card" style="animation-delay:0.45s" onclick="openModal('english')">
+      <div class="service-icon"><i class="fas fa-language"></i></div>
+      <h3>English Proficiency</h3>
+      <p>English proficiency certificate processing.</p>
+      <div class="card-footer">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <div class="price-tag">₦15,000</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODALS -->
+
+<!-- 1. ND Certificate Modal -->
+<div class="modal-overlay" id="modal-nd">
+  <div class="modal">
+    <h2>ND Certificate Application</h2>
+    <p class="subtitle">Duration: 1 Month | Cost: ₦8,000</p>
+    <div class="form-group"><label>Registration Number *</label><input type="text" id="nd-reg" placeholder="e.g. ND/CS/2020/001"></div>
+    <div class="form-group"><label>Full Name *</label><input type="text" id="nd-name" placeholder="Your full name"></div>
+    <div class="form-group"><label>Department *</label><input type="text" id="nd-dept" placeholder="e.g. Computer Science"></div>
+    <div class="form-group"><label>Date of Birth *</label><input type="date" id="nd-dob"></div>
+    <div class="form-group"><label>State of Origin *</label><input type="text" id="nd-state" placeholder="State of Origin"></div>
+    <div class="form-group"><label>Email *</label><input type="email" id="nd-email" placeholder="Email address"></div>
+    <div class="form-group"><label>Phone Number *</label><input type="tel" id="nd-phone" placeholder="Phone number"></div>
+    <div class="form-group"><label>Entry Year *</label><input type="text" id="nd-entry" placeholder="e.g. 2020"></div>
+    <div class="form-group"><label>Graduation Year *</label><input type="text" id="nd-grad" placeholder="e.g. 2022"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('nd')">Cancel</button>
+      <button class="btn-send" onclick="sendForm('nd', 'ND Certificate')"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- 2. HND Certificate Modal -->
+<div class="modal-overlay" id="modal-hnd">
+  <div class="modal">
+    <h2>HND Certificate Application</h2>
+    <p class="subtitle">Duration: 1 Month | Cost: ₦28,000</p>
+    <div class="form-group"><label>Registration Number *</label><input type="text" id="hnd-reg" placeholder="e.g. HND/CS/2022/001"></div>
+    <div class="form-group"><label>Full Name *</label><input type="text" id="hnd-name" placeholder="Your full name"></div>
+    <div class="form-group"><label>Department *</label><input type="text" id="hnd-dept" placeholder="e.g. Computer Science"></div>
+    <div class="form-group"><label>Date of Birth *</label><input type="date" id="hnd-dob"></div>
+    <div class="form-group"><label>State of Origin *</label><input type="text" id="hnd-state" placeholder="State of Origin"></div>
+    <div class="form-group"><label>Email *</label><input type="email" id="hnd-email" placeholder="Email address"></div>
+    <div class="form-group"><label>Phone Number *</label><input type="tel" id="hnd-phone" placeholder="Phone number"></div>
+    <div class="form-group"><label>Entry Year *</label><input type="text" id="hnd-entry" placeholder="e.g. 2022"></div>
+    <div class="form-group"><label>Graduation Year *</label><input type="text" id="hnd-grad" placeholder="e.g. 2024"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('hnd')">Cancel</button>
+      <button class="btn-send" onclick="sendForm('hnd', 'HND Certificate')"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- 3. Academic Transcript Modal -->
+<div class="modal-overlay" id="modal-transcript">
+  <div class="modal">
+    <h2>Academic Transcript Application</h2>
+    <p class="subtitle">Duration: 1 Week | Cost: ₦8,000</p>
+    
+    <!-- LEVEL SELECTOR ADDED HERE -->
+    <div class="form-group">
+      <label>Select Level *</label>
+      <select id="trans-level">
+        <option value="ND">ND (National Diploma)</option>
+        <option value="HND">HND (Higher National Diploma)</option>
+      </select>
+    </div>
+    
+    <div class="form-group"><label>Registration Number *</label><input type="text" id="trans-reg" placeholder="Registration number"></div>
+    <div class="form-group"><label>Full Name *</label><input type="text" id="trans-name" placeholder="Full name"></div>
+    <div class="form-group"><label>Department *</label><input type="text" id="trans-dept" placeholder="Department"></div>
+    <div class="form-group"><label>Date of Birth *</label><input type="date" id="trans-dob"></div>
+    <div class="form-group"><label>State of Origin *</label><input type="text" id="trans-state" placeholder="State of Origin"></div>
+    <div class="form-group"><label>Email *</label><input type="email" id="trans-email" placeholder="Email"></div>
+    <div class="form-group"><label>Phone Number *</label><input type="tel" id="trans-phone" placeholder="Phone number"></div>
+    <div class="form-group"><label>Entry Year *</label><input type="text" id="trans-entry" placeholder="Entry year"></div>
+    <div class="form-group"><label>Graduation Year *</label><input type="text" id="trans-grad" placeholder="Graduation year"></div>
+    <hr style="margin: 20px 0; border: 0; border-top: 1px solid rgba(10,31,92,0.1);">
+    <div class="form-group"><label>Organization Email *</label><input type="email" id="trans-org-email" placeholder="Organization Email"></div>
+    <div class="form-group"><label>Organization Address *</label><input type="text" id="trans-org-addr" placeholder="Organization Address"></div>
+    <div class="form-group"><label>State Location of Organization *</label><input type="text" id="trans-org-state" placeholder="State Location"></div>
+    <div class="form-group"><label>Organization Postal Code *</label><input type="text" id="trans-org-postal" placeholder="Postal Code"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('transcript')">Cancel</button>
+      <button class="btn-send" onclick="sendTranscript()"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- 4. Final Clearance Modal -->
+<div class="modal-overlay" id="modal-clearance">
+  <div class="modal">
+    <h2>Final Clearance Application</h2>
+    <p class="subtitle">Duration: 1 Week | Cost: ₦15,000</p>
+    <div class="form-group"><label>Full Name *</label><input type="text" id="clear-name" placeholder="Full name"></div>
+    <div class="form-group"><label>Registration Number *</label><input type="text" id="clear-reg" placeholder="Registration number"></div>
+    <div class="form-group"><label>Department *</label><input type="text" id="clear-dept" placeholder="Department"></div>
+    <div class="form-group"><label>Phone Number *</label><input type="tel" id="clear-phone" placeholder="Phone number"></div>
+    <div class="form-group"><label>Clearance Requirements Status</label>
+      <textarea id="clear-reqs" placeholder="List available receipts/documents you have..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('clearance')">Cancel</button>
+      <button class="btn-send" onclick="sendClearance()"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- 5. New Intake Clearance Modal -->
+<div class="modal-overlay" id="modal-intake">
+  <div class="modal">
+    <h2>New Intake Clearance</h2>
+    <p class="subtitle">Fresh Student Registration | Cost: ₦5,000</p>
+    <div class="form-group"><label>Full Name *</label><input type="text" id="intake-name" placeholder="Full name"></div>
+    <div class="form-group"><label>Registration Number/Entry Number *</label><input type="text" id="intake-reg" placeholder="Reg/Entry number"></div>
+    <div class="form-group"><label>Email Address *</label><input type="email" id="intake-email" placeholder="Email"></div>
+    <div class="form-group"><label>Phone Number *</label><input type="tel" id="intake-phone" placeholder="Phone number"></div>
+    <div class="form-group"><label>State of Origin *</label><input type="text" id="intake-state" placeholder="State of Origin"></div>
+    <div class="form-group"><label>L.G.A *</label><input type="text" id="intake-lga" placeholder="Local Government Area"></div>
+    <div class="form-group"><label>Address *</label><input type="text" id="intake-addr" placeholder="Home Address"></div>
+    <div class="form-group"><label>Blood Group *</label><input type="text" id="intake-blood" placeholder="Blood Group"></div>
+    <div class="form-group"><label>NIN *</label><input type="text" id="intake-nin" placeholder="National ID Number"></div>
+    <hr style="margin: 20px 0; border: 0; border-top: 1px solid rgba(10,31,92,0.1);">
+    <p style="font-weight: 600; margin-bottom: 10px; color: var(--blue);">Next of Kin Details</p>
+    <div class="form-group"><label>Next of Kin Name *</label><input type="text" id="intake-kin-name" placeholder="Next of Kin Name"></div>
+    <div class="form-group"><label>Next of Kin Phone *</label><input type="tel" id="intake-kin-phone" placeholder="Next of Kin Phone"></div>
+    <div class="form-group"><label>Relationship *</label><input type="text" id="intake-kin-rel" placeholder="Relationship"></div>
+    <div class="form-group"><label>Passport Photograph *</label><input type="text" id="intake-passport" placeholder="Link to passport photo or describe"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('intake')">Cancel</button>
+      <button class="btn-send" onclick="sendIntake()"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- 6. School Result Modal -->
+<div class="modal-overlay" id="modal-result">
+  <div class="modal">
+    <h2>School Result Application</h2>
+    <p class="subtitle">Result Checking & Processing | Cost: ₦15,000</p>
+    <div class="form-group"><label>Full Name *</label><input type="text" id="result-name" placeholder="Full name"></div>
+    <div class="form-group"><label>Registration Number *</label><input type="text" id="result-reg" placeholder="Registration number"></div>
+    <div class="form-group"><label>Email Address *</label><input type="email" id="result-email" placeholder="Email"></div>
+    <div class="form-group"><label>Phone Number *</label><input type="tel" id="result-phone" placeholder="Phone number"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('result')">Cancel</button>
+      <button class="btn-send" onclick="sendResult()"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- 7. Mobilization Modal -->
+<div class="modal-overlay" id="modal-mobilization">
+  <div class="modal">
+    <h2>Mobilization Application</h2>
+    <p class="subtitle">NYSC Document Preparation | Cost: ₦5,000</p>
+    <div class="form-group"><label>Full Name *</label><input type="text" id="mob-name" placeholder="Full name"></div>
+    <div class="form-group"><label>JAMB Admission Letter *</label><input type="text" id="mob-jamb" placeholder="Do you have this? (Yes/No/Link)"></div>
+    <div class="form-group"><label>NIN *</label><input type="text" id="mob-nin" placeholder="National ID Number"></div>
+    <div class="form-group"><label>School ID Card *</label><input type="text" id="mob-id" placeholder="Do you have this? (Yes/No/Link)"></div>
+    <div class="form-group"><label>HND Statement of Result *</label><input type="text" id="mob-result" placeholder="Do you have this? (Yes/No/Link)"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('mobilization')">Cancel</button>
+      <button class="btn-send" onclick="sendMobilization()"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- 8. Reference Letter Modal -->
+<div class="modal-overlay" id="modal-reference">
+  <div class="modal">
+    <h2>Reference Letter Application</h2>
+    <p class="subtitle">Official Reference Letter Processing | Cost: ₦15,000</p>
+    <div class="form-group"><label>Full Name *</label><input type="text" id="ref-name" placeholder="Full name"></div>
+    <div class="form-group"><label>Registration Number *</label><input type="text" id="ref-reg" placeholder="Registration number"></div>
+    <div class="form-group"><label>Statement of Result *</label><input type="text" id="ref-result" placeholder="Do you have this? (Yes/No/Link)"></div>
+    <div class="form-group"><label>Purpose of Reference *</label><input type="text" id="ref-purpose" placeholder="e.g. Job Application, Scholarship"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('reference')">Cancel</button>
+      <button class="btn-send" onclick="sendReference()"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- 9. English Proficiency Modal -->
+<div class="modal-overlay" id="modal-english">
+  <div class="modal">
+    <h2>English Proficiency Application</h2>
+    <p class="subtitle">English Proficiency Certificate | Cost: ₦15,000</p>
+    <div class="form-group"><label>Full Name *</label><input type="text" id="eng-name" placeholder="Full name"></div>
+    <div class="form-group"><label>Registration Number *</label><input type="text" id="eng-reg" placeholder="Registration number"></div>
+    <div class="form-group"><label>Statement of Result *</label><input type="text" id="eng-result" placeholder="Do you have this? (Yes/No/Link)"></div>
+    <div class="form-group"><label>Purpose *</label><input type="text" id="eng-purpose" placeholder="e.g. Foreign University Application"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('english')">Cancel</button>
+      <button class="btn-send" onclick="sendEnglish()"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const WA = '2348144779998';
+
+function openModal(id) { 
+    document.getElementById('modal-'+id).classList.add('active'); 
+}
+
+function closeModal(id) { 
+    document.getElementById('modal-'+id).classList.remove('active'); 
+}
+
+function sendWA(msg) {
+  // Fixed URL spacing issue
+  window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
+}
+
+// Generic Form Sender for ND/HND Certificates
+function sendForm(prefix, serviceName) {
+  const fields = ['reg', 'name', 'dept', 'dob', 'state', 'email', 'phone', 'entry', 'grad'];
+  let data = {};
+  let empty = false;
+  
+  fields.forEach(f => {
+    const val = document.getElementById(`${prefix}-${f}`).value.trim();
+    if(!val) empty = true;
+    data[f] = val;
+  });
+  
+  if(empty) { alert('Please fill all required fields.'); return; }
+  
+  const msg = `*CLEARANCE DEALS - ${serviceName}*\n\n` +
+    `▪️ Reg No: ${data.reg}\n▪️ Name: ${data.name}\n▪️ Dept: ${data.dept}\n` +
+    `▪️ DOB: ${data.dob}\n▪️ State: ${data.state}\n▪️ Email: ${data.email}\n` +
+    `▪️ Phone: ${data.phone}\n▪️ Entry: ${data.entry}\n▪️ Graduation: ${data.grad}\n\n` +
+    `_Please confirm cost and processing time._`;
+  sendWA(msg);
+}
+
+// Specific Sender for Transcript with Level Selection
+function sendTranscript() {
+  // Get Level Selection
+  const level = document.getElementById('trans-level').value; // "ND" or "HND"
+  
+  const ids = ['trans-reg', 'trans-name', 'trans-dept', 'trans-dob', 'trans-state', 'trans-email', 
+               'trans-phone', 'trans-entry', 'trans-grad', 'trans-org-email', 'trans-org-addr', 
+               'trans-org-state', 'trans-org-postal'];
+  let data = {};
+  let empty = false;
+  ids.forEach(id => {
+    const val = document.getElementById(id).value.trim();
+    if(!val) empty = true;
+    data[id] = val;
+  });
+  if(empty) { alert('Please fill all required fields.'); return; }
+  
+  // Dynamic Header based on selection: "ND TRANSCRIPT" or "HND TRANSCRIPT"
+  const msg = `*CLEARANCE DEALS - ${level} TRANSCRIPT*\n\n*Student Info:*\n` +
+    `▪️ Reg: ${data['trans-reg']}\n▪️ Name: ${data['trans-name']}\n▪️ Dept: ${data['trans-dept']}\n` +
+    `▪️ DOB: ${data['trans-dob']}\n▪️ State: ${data['trans-state']}\n▪️ Email: ${data['trans-email']}\n` +
+    `▪️ Phone: ${data['trans-phone']}\n▪️ Entry: ${data['trans-entry']}\n▪️ Grad: ${data['trans-grad']}\n\n` +
+    `*Organization Info:*\n▪️ Email: ${data['trans-org-email']}\n▪️ Address: ${data['trans-org-addr']}\n` +
+    `▪️ State: ${data['trans-org-state']}\n▪️ Postal: ${data['trans-org-postal']}\n\n` +
+    `_Duration: 1 Week | Cost: ₦8,000_`;
+  sendWA(msg);
+}
+
+function sendClearance() {
+  const name = document.getElementById('clear-name').value.trim();
+  // Fixed typo: getId -> getElementById
+  const reg = document.getElementById('clear-reg').value.trim();
+  const dept = document.getElementById('clear-dept').value.trim();
+  const phone = document.getElementById('clear-phone').value.trim();
+  const reqs = document.getElementById('clear-reqs').value.trim();
+  
+  if(!name || !reg || !dept || !phone) { alert('Please fill required fields.'); return; }
+  
+  const msg = `*CLEARANCE DEALS - Final Clearance*\n\n` +
+    `▪️ Name: ${name}\n▪️ Reg No: ${reg}\n▪️ Dept: ${dept}\n▪️ Phone: ${phone}\n\n` +
+    `*Available Documents:*\n${reqs || 'None specified'}\n\n` +
+    `_Duration: 1 Week | Cost: ₦15,000_`;
+  sendWA(msg);
+}
+
+function sendIntake() {
+  const fields = ['name', 'reg', 'email', 'phone', 'state', 'lga', 'addr', 'blood', 'nin'];
+  let data = {};
+  let empty = false;
+  fields.forEach(f => {
+    const val = document.getElementById(`intake-${f}`).value.trim();
+    if(!val) empty = true;
+    data[f] = val;
+  });
+  
+  const kinName = document.getElementById('intake-kin-name').value.trim();
+  const kinPhone = document.getElementById('intake-kin-phone').value.trim();
+  const kinRel = document.getElementById('intake-kin-rel').value.trim();
+  const passport = document.getElementById('intake-passport').value.trim();
+  
+  if(empty || !kinName || !kinPhone) { alert('Please fill all required fields.'); return; }
+  
+  const msg = `*CLEARANCE DEALS - New Intake Clearance*\n\n*Personal Info:*\n` +
+    `▪️ Name: ${data.name}\n▪️ Reg: ${data.reg}\n▪️ Email: ${data.email}\n▪️ Phone: ${data.phone}\n` +
+    `▪️ State: ${data.state}\n▪️ LGA: ${data.lga}\n▪️ Address: ${data.addr}\n` +
+    `▪️ Blood Group: ${data.blood}\n▪️ NIN: ${data.nin}\n\n` +
+    `*Next of Kin:*\n▪️ Name: ${kinName}\n▪️ Phone: ${kinPhone}\n▪️ Relationship: ${kinRel}\n\n` +
+    `*Passport:* ${passport}\n\n_Cost: ₦5,000_`;
+  sendWA(msg);
+}
+
+function sendResult() {
+  const name = document.getElementById('result-name').value.trim();
+  const reg = document.getElementById('result-reg').value.trim();
+  const email = document.getElementById('result-email').value.trim();
+  const phone = document.getElementById('result-phone').value.trim();
+  
+  if(!name || !reg || !email || !phone) { alert('Please fill all fields.'); return; }
+  
+  const msg = `*CLEARANCE DEALS - School Result*\n\n` +
+    `▪️ Name: ${name}\n▪️ Reg No: ${reg}\n▪️ Email: ${email}\n▪️ Phone: ${phone}\n\n_Cost: ₦2,000_`;
+  sendWA(msg);
+}
+
+function sendMobilization() {
+  const name = document.getElementById('mob-name').value.trim();
+  const jamb = document.getElementById('mob-jamb').value.trim();
+  const nin = document.getElementById('mob-nin').value.trim();
+  const id = document.getElementById('mob-id').value.trim();
+  const result = document.getElementById('mob-result').value.trim();
+  
+  if(!name || !jamb || !nin || !id || !result) { alert('Please fill all fields.'); return; }
+  
+  const msg = `*CLEARANCE DEALS - Mobilization*\n\n` +
+    `▪️ Name: ${name}\n▪️ JAMB Letter: ${jamb}\n▪️ NIN: ${nin}\n▪️ School ID: ${id}\n▪️ Statement of Result: ${result}\n\n_Cost: ₦10,000_`;
+  sendWA(msg);
+}
+
+function sendReference() {
+  const name = document.getElementById('ref-name').value.trim();
+  const reg = document.getElementById('ref-reg').value.trim();
+  const result = document.getElementById('ref-result').value.trim();
+  const purpose = document.getElementById('ref-purpose').value.trim();
+  
+  if(!name || !reg || !result) { alert('Please fill required fields.'); return; }
+  
+  const msg = `*CLEARANCE DEALS - Reference Letter*\n\n` +
+    `▪️ Name: ${name}\n▪️ Reg No: ${reg}\n▪️ Statement of Result: ${result}\n▪️ Purpose: ${purpose || 'Not specified'}\n\n_Cost: ₦3,000_`;
+  sendWA(msg);
+}
+
+function sendEnglish() {
+  const name = document.getElementById('eng-name').value.trim();
+  const reg = document.getElementById('eng-reg').value.trim();
+  const result = document.getElementById('eng-result').value.trim();
+  const purpose = document.getElementById('eng-purpose').value.trim();
+  
+  if(!name || !reg || !result) { alert('Please fill required fields.'); return; }
+  
+  const msg = `*CLEARANCE DEALS - English Proficiency*\n\n` +
+    `▪️ Name: ${name}\n▪️ Reg No: ${reg}\n▪️ Statement of Result: ${result}\n▪️ Purpose: ${purpose || 'Not specified'}\n\n_Cost: ₦5,000_`;
+  sendWA(msg);
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (html.getAttribute('data-theme')==='dark') { 
+      html.removeAttribute('data-theme'); 
+      btn.innerHTML='<i class="fas fa-moon"></i>'; 
+  } else { 
+      html.setAttribute('data-theme','dark'); 
+      btn.innerHTML='<i class="fas fa-sun"></i>'; 
+  }
+}
+
+// close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(o => {
+  o.addEventListener('click', e => { 
+      if(e.target === o) o.classList.remove('active'); 
+  });
+});
+
+// Scroll animation
+const cards = document.querySelectorAll('.service-card');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.style.opacity = 1; });
+}, { threshold: 0.1 });
+cards.forEach(c => { c.style.opacity = 0; obs.observe(c); });
+setTimeout(() => cards.forEach(c => c.style.opacity = ''), 100);
+</script>
+</body>
+</html>
