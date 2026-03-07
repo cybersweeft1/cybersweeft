@@ -208,6 +208,23 @@
     line-height: 1.6;
     flex: 1;
   }
+
+  /* NEW: Button and Price layout */
+  .btn-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  .price-tag {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--blue-light);
+    font-family: 'Syne', sans-serif;
+  }
+  [data-theme="dark"] .price-tag { color: #93c5fd; }
+
   .service-btn {
     display: inline-flex; align-items: center; gap: 8px;
     background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
@@ -296,6 +313,7 @@
     .services-grid { grid-template-columns: 1fr; }
     .stats-row { gap: 28px; }
     nav { padding: 0 4%; }
+    .btn-row { flex-direction: row; justify-content: space-between; }
   }
 </style>
 </head>
@@ -311,7 +329,6 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-badge">⚡ Professional Digital Services</div>
   <h1>CYBER <span>SWEEFT</span><br>SERVICES</h1>
@@ -320,7 +337,6 @@
   <div class="scroll-indicator"><i class="fas fa-chevron-down"></i></div>
 </section>
 
-<!-- SERVICES -->
 <section class="services-section">
   <div class="section-header">
     <h2>Our Services</h2>
@@ -339,7 +355,10 @@
       <div class="service-icon"><i class="fas fa-building"></i></div>
       <h3>CAC Registration</h3>
       <p>Get your business registered with the Corporate Affairs Commission within 6 hours.</p>
-      <div class="service-btn">Get Started <i class="fas fa-arrow-right"></i></div>
+      <div class="btn-row">
+        <div class="service-btn">Get Started <i class="fas fa-arrow-right"></i></div>
+        <span class="price-tag">₦30,000</span>
+      </div>
     </a>
 
     <a href="jamb.html" class="service-card" style="animation-delay:0.15s">
@@ -349,7 +368,6 @@
       <div class="service-btn">Explore <i class="fas fa-arrow-right"></i></div>
     </a>
 
-    <!-- CV & Document Generation Card -->
     <a href="https://ultavra.vercel.app/#home" target="_blank" class="service-card" style="animation-delay:0.35s">
       <div class="service-icon"><i class="fas fa-file-alt"></i></div>
       <h3>CV & Document Generation</h3>
@@ -357,36 +375,47 @@
       <div class="service-btn">Generate Now <i class="fas fa-arrow-right"></i></div>
     </a>
 
-    <!-- Local Government ID Card -->
     <a href="localgovernment.html" class="service-card" style="animation-delay:0.4s">
       <div class="service-icon"><i class="fas fa-id-badge"></i></div>
       <h3>Local Government Identification</h3>
       <p>Instant Local Government Identification form. Pay and receive your form automatically via email ASAP.</p>
-      <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+      <div class="btn-row">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <span class="price-tag">₦3,000</span>
+      </div>
     </a>
     
     <a href="namechange.html" class="service-card" style="animation-delay:0.2s">
       <div class="service-icon"><i class="fas fa-newspaper"></i></div>
       <h3>Newspaper Change of Name</h3>
       <p>Publish your name change officially in a newspaper within 48 hours. Quick and hassle-free.</p>
-      <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+      <div class="btn-row">
+        <div class="service-btn">Apply Now <i class="fas fa-arrow-right"></i></div>
+        <span class="price-tag">₦8,000</span>
+      </div>
     </a>
 
     <a href="nerd.html" class="service-card" style="animation-delay:0.25s">
       <div class="service-icon"><i class="fas fa-user-graduate"></i></div>
       <h3>NERD Enrollment</h3>
-      <p>Full NERD enrollment form with personal data, academic details, and project upload. Price: ₦13,000.</p>
-      <div class="service-btn">Enroll Now <i class="fas fa-arrow-right"></i></div>
+      <p>Full NERD enrollment form with personal data, academic details, and project upload.</p>
+      <div class="btn-row">
+        <div class="service-btn">Enroll Now <i class="fas fa-arrow-right"></i></div>
+        <span class="price-tag">₦13,000</span>
+      </div>
     </a>
 
     <a href="nysc.html" class="service-card" style="animation-delay:0.25s">
       <div class="service-icon"><i class="fas fa-user-graduate"></i></div>
       <h3>NYSC Registration</h3>
-      <p>Get registered for National Youth Service Corps Programme. Price: ₦10,000.</p>
-      <div class="service-btn">Register Now <i class="fas fa-arrow-right"></i></div>
+      <p>Get registered for National Youth Service Corps Programme.</p>
+      <div class="btn-row">
+        <div class="service-btn">Register Now <i class="fas fa-arrow-right"></i></div>
+        <span class="price-tag">₦10,000</span>
+      </div>
     </a>
 
-        <a href="cert.html" class="service-card" style="animation-delay:0.05s">
+    <a href="cert.html" class="service-card" style="animation-delay:0.05s">
       <div class="service-icon"><i class="fas fa-id-card"></i></div>
       <h3>Clearance Deals</h3>
       <p>Smart, Fast and Reliable Way For Student Clearance Without the Stress.</p>
@@ -397,13 +426,15 @@
       <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
       <h3>Student Project Templates</h3>
       <p>Final year project templates and materials for students. Get your project done right.</p>
-      <div class="service-btn">Browse Projects <i class="fas fa-arrow-right"></i></div>
+      <div class="btn-row">
+        <div class="service-btn">Browse Projects <i class="fas fa-arrow-right"></i></div>
+        <span class="price-tag">₦2,500</span>
+      </div>
     </a>
 
   </div>
 </section>
 
-<!-- ABOUT -->
 <section class="about-section">
   <h2>Why Choose Us?</h2>
   <p>Cyber Sweeft Services is your trusted digital partner for fast, professional, and affordable Nigerian identity, academic, and business services. We deliver with speed, accuracy, and care.</p>
@@ -416,7 +447,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">CYBER <span>SWEEFT</span> SERVICES</div>
   <p style="font-size:0.85rem; margin-bottom:10px;">"Distance Is Not A Barrier"</p>
