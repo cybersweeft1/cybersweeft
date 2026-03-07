@@ -122,6 +122,18 @@
       <button class="apply-btn" onclick="openModal('demo')"><i class="fab fa-whatsapp"></i> Get Now</button>
     </div>
 
+    <div class="sub-card">
+        <div class="sub-card-header">
+          <div class="sub-icon"><i class="fas fa-user-check"></i></div>
+          <div>
+            <h3>NIN Validation</h3>
+            <div class="price">₦1,000 — Official Validation Service</div>
+          </div>
+        </div>
+        <p class="desc">Validate the authenticity of a NIN and confirm identity against national records.</p>
+        <button class="apply-btn" onclick="openModal('validation')"><i class="fab fa-whatsapp"></i> Get Now</button>
+      </div>
+
   </div>
 </div>
 
@@ -190,6 +202,27 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="modal-validation">
+    <div class="modal">
+      <h2>NIN Validation</h2>
+      <p class="subtitle">Fill in the identity details to proceed with validation.</p>
+      <div class="form-group"><label>Full Name *</label><input type="text" id="val-name" placeholder="Full name as it appears on NIN"></div>
+      <div class="form-group"><label>National ID Number (NIN) *</label><input type="text" id="val-nin" placeholder="11-digit NIN" maxlength="11"></div>
+      <div class="form-group"><label>Reason for Validation *</label>
+        <select id="val-reason">
+          <option value="Personal Record Check">Personal Record Check</option>
+          <option value="Employment Verification">Employment Verification</option>
+          <option value="Official/Legal Requirement">Official/Legal Requirement</option>
+          <option value="KYC Compliance">KYC Compliance</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal('validation')">Cancel</button>
+        <button class="btn-send" onclick="sendValidation()"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
 <script>
 const WA = '2348144779998';
 function openModal(id) { document.getElementById('modal-'+id).classList.add('active'); }
@@ -222,6 +255,17 @@ function sendDemo() {
   const msg = `*NIN SERVICES*\n*Service: NIN Demo Search*\n\n▪️ Slip Type: ${type}\n▪️ First Name: ${fn}\n▪️ Surname: ${sn}\n▪️ Gender: ${gender}\n▪️ Date of Birth: ${dob}\n\n_Unit Cost: ₦2,000_`;
   sendWA(msg);
 }
+
+// NEW FUNCTION: NIN VALIDATION
+function sendValidation() {
+  const name = document.getElementById('val-name').value.trim();
+  const nin = document.getElementById('val-nin').value.trim();
+  const reason = document.getElementById('val-reason').value;
+  if (!name || !nin) { alert('Please fill all required fields.'); return; }
+  const msg = `*NIN SERVICES*\n*Service: NIN Validation*\n\n▪️ Full Name: ${name}\n▪️ NIN Number: ${nin}\n▪️ Reason: ${reason}\n\n_Unit Cost: ₦1,000_`;
+  sendWA(msg);
+}
+
 function toggleTheme() {
   const html = document.documentElement;
   const btn = document.getElementById('themeBtn');
